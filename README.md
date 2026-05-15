@@ -29,7 +29,7 @@ paste \
 	| sort -t $'\t' -k 1,1 \
 	> output.csv
 ```
-### cách 2 ( sơ khai, chạy lệnh ls 1 lần)
+### cách 2 ( tối ưu, chạy lệnh ls 1 lần)
 ```
 ls -l /etc |
 tee >(cut -c1 > /tmp/type) |
