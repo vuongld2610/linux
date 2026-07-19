@@ -1,3 +1,5 @@
+#EXTM3U
+#EXTINF:-1, FPT Play Live
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay.net/live/media/v6abr/live247-dash-avc/index.mpd?sign=1784433765-OTMxOTUzMA-0-498d9663d9f65c7dbf40accf13655185
