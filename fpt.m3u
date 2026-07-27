@@ -3,5 +3,8 @@
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay.net/live/media/vtv6/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
-
+#EXTINF:-1, event
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://subs-livecdn.fptplay.net/live/media/su-kien-03/dash_hvc/index.mpd?sign=1785136981-OTMxOTUzMA-0-c6c6b3965bfb2a332fa26c51c4fe1b74
 
