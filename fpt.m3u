@@ -1,5 +1,12 @@
 #EXTM3U
-#EXTINF:-1, FPT Play Live
+#EXTINF:-1, VTV6
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay.net/live/media/v6abr/live247-dash-avc/index.mpd?sign=1784433765-OTMxOTUzMA-0-498d9663d9f65c7dbf40accf13655185
+
+
+#EXTINF:-1, live vent
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://subs-livecdn.fptplay.net/live/media/su-kien-03/dash_hvc/index.mpd?sign=1785136981-OTMxOTUzMA-0-c6c6b3965bfb2a332fa26c51c4fe1b74
+
