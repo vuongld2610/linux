@@ -2,7 +2,7 @@
 #EXTINF:-1, VTV6
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
-https://subs-livecdn.fptplay.net/live/media/v6abr/live247-dash-avc/index.mpd?sign=1784433765-OTMxOTUzMA-0-498d9663d9f65c7dbf40accf13655185
+https://subs-livecdn.fptplay.net/live/media/vtv6/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
 
 
 #EXTINF:-1, live vent
