@@ -39,3 +39,11 @@ https://subs-livecdn.fptplay.net/live/media/vtv9/live247-dash-avc/index.mpd?sign
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay.net/live/media/vtv10/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV5 Tây Nam Bộ
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://subs-livecdn.fptplay.net/live/media/vtv5tnb/live-dash-avc/index.mpd?sign=1785298460-OTMxOTUzMA-0-441e9ea8002b81f7e7236ed811c6c68f
+#EXTINF:-1, VTV5 Tây Nguyên
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://subs-livecdn.fptplay.net/live/media/vtv5tn/live-dash-avc/index.mpd?sign=1785298661-OTMxOTUzMA-0-e5f4cf801374eaf89f09f7a397af59d0
