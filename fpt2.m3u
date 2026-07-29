@@ -1,0 +1,25 @@
+#EXTM3U
+#EXTINF:-1, VTV1
+https://subs-livecdn.fptplay.net/live/media/vtv1/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV2
+https://subs-livecdn.fptplay.net/live/media/vtv2/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV3
+https://subs-livecdn.fptplay.net/live/media/vtv3/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV4
+https://subs-livecdn.fptplay.net/live/media/vtv4/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV5
+https://subs-livecdn.fptplay.net/live/media/vtv5/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV6
+https://subs-livecdn.fptplay.net/live/media/vtv6/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV7
+https://subs-livecdn.fptplay.net/live/media/vtv7/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV8
+https://subs-livecdn.fptplay.net/live/media/vtv8/live-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV9
+https://subs-livecdn.fptplay.net/live/media/vtv9/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV10
+https://subs-livecdn.fptplay.net/live/media/vtv10/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+#EXTINF:-1, VTV5 Tây Nam Bộ
+https://subs-livecdn.fptplay.net/live/media/vtv5tnb/live-dash-avc/index.mpd?sign=1785298460-OTMxOTUzMA-0-441e9ea8002b81f7e7236ed811c6c68f
+#EXTINF:-1, VTV5 Tây Nguyên
+https://subs-livecdn.fptplay.net/live/media/vtv5tn/live-dash-avc/index.mpd?sign=1785298661-OTMxOTUzMA-0-e5f4cf801374eaf89f09f7a397af59d0
