@@ -30,7 +30,7 @@ https://subs-livecdn.fptplay.net/live/media/vtv7/live247-dash-avc/index.mpd?sign
 #EXTINF:-1, VTV8
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
-https://subs-livecdn.fptplay.net/live/media/vtv8/live247-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
+https://subs-livecdn.fptplay.net/live/media/vtv8/live-dash-avc/index.mpd?sign=1785131394-OTMxOTUzMA-0-8b0f0411a7e86e6763196dfa3b56d734
 #EXTINF:-1, VTV9
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
