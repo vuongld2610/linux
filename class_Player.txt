@@ -1,0 +1,2051 @@
+// Namespace: TanksMP
+public class Player : BasePlayer // TypeDefIndex: 3325
+{
+	// Fields
+	public const float SetupRespawnEffectDelay = 2;
+	private static readonly Color []][[[[[[[[][]][[[[]]][[][]]]]][[[[]][[[]][[[[]; // 0x0
+	[CompilerGenerated]
+	private static Action<float> ][[]]][][][]]][][][]]][[[[]]][]]][[[]]][[[[]][]; // 0x10
+	[CompilerGenerated]
+	private static Action ][][]][]]][[[]]][[[]]]]]]][[]]]]]]][[][][[][]][; // 0x18
+	[CompilerGenerated]
+	private static Action<Player> [[][[[[[[[[][][]]][]]][[[][]]]]][[]]][[]][][]][; // 0x20
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<PooledBehaviour>, ValueUpdater<float>> [][[]]]][][]]][[][[][][][][][[[[[][][[][][]]]]]; // 0x28
+	[CompilerGenerated]
+	private static Action<Player, ]]][[]][[]]][[]]][][]]][[[[[[]]]]]][][][[[][[[[> [[][][][[]][[][[[][[][][][]][[[[][[][[]][[[][][; // 0x30
+	[CompilerGenerated]
+	private static Action<Player> [][]]][]]]]]]]][[[][]]]]]][][][[][[[]]][[[[][[[; // 0x38
+	[CompilerGenerated]
+	private static Action<Player> ][][[[][[[]]][]]]][][][[]][[]][][[[[][][[][[]][; // 0x40
+	[CompilerGenerated]
+	private static Action<Player> []]]][[[]]]][]]]][]][[][][]][[][[][[]]]]][[[]]]; // 0x48
+	[CompilerGenerated]
+	private static Action<Player> ][]][][[]][[][[]]]]]]]][[][[[]][]][[[[]][][[[][; // 0x50
+	[CompilerGenerated]
+	private static Action<Player> [[[][]][]]]]][[[[[][][[][][[]]]][[]]][]]][][[[[; // 0x58
+	[SerializeField]
+	private PathWaypoint _pathWaypointPrefab; // 0x30
+	private PathWaypoint [[]]][]]][]][]]][[[]][]]][[][[][][]]]]]]][[]]]]; // 0x38
+	[SerializeField]
+	private TankIngame _tankHolder; // 0x40
+	[Header("Player sounds")]
+	[SerializeField]
+	private AudioClip _shieldSound; // 0x48
+	[SerializeField]
+	private AudioClip _radarSound; // 0x50
+	[SerializeField]
+	private AudioClip _respawnSound; // 0x58
+	[SerializeField]
+	private AudioClip[] _destroyedSounds; // 0x60
+	[SerializeField]
+	private AudioClip[] _towerDestroyedSounds; // 0x68
+	[SerializeField]
+	private AudioClip _autoLandmineSound; // 0x70
+	[SerializeField]
+	private AudioClip _landmineSound; // 0x78
+	[SerializeField]
+	private AudioClip _aegisSound; // 0x80
+	[SerializeField]
+	private AudioClip _camouflageSound; // 0x88
+	[SerializeField]
+	private AudioClip _startSound; // 0x90
+	[SerializeField]
+	private AudioClip _kamikazeSound; // 0x98
+	private byte ][[][][[[]][[[]][]][][]]]]][][][][][][[[][[[]]]; // 0xA0
+	private Coroutine [[[[][]]][][[][][[][]]]][[[]]]]][[[[][[][[[][[[; // 0xA8
+	[SerializeField]
+	private Animator _spawnAnimation; // 0xB0
+	private ObscuredFloat ][]][[[[][[[]]][[[[[[]]]][]]]]]][[[[[[[[]][][][; // 0xB8
+	private ObscuredInt ][[[][[[[]][[[]][][[[]]]][[]]]]][[]][]][[][]]]]; // 0xD0
+	private ][[[[][[[]]]]][][]][][]]][][]]][[[[[][]][][][[[ ][[[][]]][[][]]][[]]]][[[]][]][]][[[[[[][]][[]]; // 0xE8
+	[SerializeField]
+	private AccumulativeShield _accumulativeShield; // 0xF0
+	[CompilerGenerated]
+	private bool <[]][]][][[]]]]]]]]]][]]][[[[][[[]]]]]]]][][[[]]>k__BackingField; // 0xF8
+	[CompilerGenerated]
+	private float <[][[]][[[[][[[][[]][[][[[[[[[[[][][]][]][[]]]]]>k__BackingField; // 0xFC
+	private AudioSource ]]]]]]][][[][[]][[[[[]]][[]][[]]][[][][[[[]][[]; // 0x100
+	private float ]][[][][][[][]]][[]]][[]][[]][[[[][]]][]]]][]][; // 0x108
+	private float [][][[][]][[[[[]]][[][[][[][][][[][][[[[]]]][]]; // 0x10C
+	private float ][[[]]][[[][[]]][][]]]][[]]]]]]]]]]][[][[][]][[; // 0x110
+	private float [][[][]][][[[]][[]]][]][[[[[]]][[[][][[][][[[]]; // 0x114
+	private float [][]][[][][[]]]]]][]][[[]][[[]]]][[[][][][][]]]; // 0x118
+	[CompilerGenerated]
+	private bool <[]][[[]]]][][][[][[]]][[]]][]]]][[[][]]][[][[]]>k__BackingField; // 0x11C
+	private float [][][[]][][][][[]][[[][[][[[[[[][]][[]]]]][]]][; // 0x120
+	[CompilerGenerated]
+	private bool <][]][]]][[]]]]]][]]]]][][][][[[[[]][]]][]][[[]]>k__BackingField; // 0x124
+	private float []][[]]]][][[][[[[][[]]]]]][][]][[[[[][][[][[[[; // 0x128
+	private bool [][]][][]]]]]]]]][][[[]][]][[][]][[][]]][]]]][]; // 0x12C
+	private bool [[[[][][[[]][[[]][[][]]][[][][]][][][][]]][]]]]; // 0x12D
+	private float ][[]][[[[]]][]][[[]][][][[[][[[][][[][][][[][][; // 0x130
+	private float []]][]][][]][]][[[[[]][[[]]]]]][]]]][]]]][][][[; // 0x134
+	private float [[]]][[]][[][]]]]][][[[[[][[][[]][[[]][[[][][[]; // 0x138
+	private Coroutine [[[[[][]][]][[[]][[][[[[][]]]]][[[[]]]]]][[][[[; // 0x140
+	private float []]][[]]][]][[[[[[[][]]]]][[][]]][[]]][[][[[[[[; // 0x148
+	private float [[[[[]][[[[][]][[][]][]]][[]]]][]][[[[][][][[]]; // 0x14C
+	private bool []][[[[[[[][[]][][[[[[]][[][[][]]]]][[[[[]]]]]]; // 0x150
+	private bool [[[]][][[]]]]]]][]][]][[]]]]][[[][]][][[][[]][[; // 0x151
+	private PooledBehaviour ][][[[[][[[]]][]]][]]][[[][]][[[[]]][][[][[][]]; // 0x158
+	private bool ]]]]]][]][[[][]]]][]][[]][]]]]]][[[]]]][[][]][[; // 0x160
+	private Coroutine [[[]][[[]]][][]]]][][[]]]][[][[][[[][[][][[][[[; // 0x168
+	private Coroutine ][[[]][]][[[]]]][[]]]][][][[[[][[]][[][][]][[]]; // 0x170
+	private Player ][][[[[]]][][[[[]]][]][]][[]]]][][[[][[][][][[]; // 0x178
+	[CompilerGenerated]
+	private bool <][][]][[[[][[]]][][][][]][][[[[][][[]][[[]][[[]>k__BackingField; // 0x180
+	private bool [][][[][]][]]][[]][][][][]]]]][]][]][[][[[]]][[; // 0x181
+	[CompilerGenerated]
+	private int <[]][[]]]][[]][[[[[[[[[[][]]][]][[]]]]][[][][]][>k__BackingField; // 0x184
+	[CompilerGenerated]
+	private bool <][][]]][[][[]][]][][[]][]]][][]][[][[[]][][[[][>k__BackingField; // 0x188
+	[CompilerGenerated]
+	private bool <[[]][]][][[[][[[]]]]][[][[[[][][]]][[]]]][][]][>k__BackingField; // 0x189
+	private bool []]][][[][[][[[[]]][[[[][][[][[[[]]]][[[][]]]]]; // 0x18A
+	private Coroutine [[]][][]][[[[]]][[]]][[]]]]]][][[]]]][][][][[[]; // 0x190
+	private bool [][[[][[]]]]][[[][[[]][]]]][][][]][[]][][[[[][[; // 0x198
+	private Coroutine ][[[[][][[[][][]][][]]]]]]][[]][[][][]][[]]]]][; // 0x1A0
+	private bool ]][][[[][[[[[][[]]][[]]][[][[]][][][][[[[[][]][; // 0x1A8
+	private Coroutine [[[[[]]][[[]]]][[][[[[]]][]]]]][[]][][[[[][]]]]; // 0x1B0
+	[HideInInspector]
+	public short turretRotation; // 0x1B8
+	private Vector2 [[[][]][][][][[[[[][][[][]][[][][][[]]]]]]][][]; // 0x1BC
+	[SerializeField]
+	private GameObject _arrow; // 0x1C8
+	[SerializeField]
+	private GameObject shield; // 0x1D0
+	[SerializeField]
+	private GameObject _damageMultiplier; // 0x1D8
+	[SerializeField]
+	private GameObject aegis; // 0x1E0
+	[SerializeField]
+	private GameObject _ignoreBulletsEffect; // 0x1E8
+	[SerializeField]
+	private GameObject respawnShield; // 0x1F0
+	[SerializeField]
+	protected GameObject _bossProtection; // 0x1F8
+	[SerializeField]
+	private GameObject _scorpionShield; // 0x200
+	private float ][[]]]][[[][][[[][[[[][[][][[]]]]]]]]][[[][][][; // 0x208
+	private float ][]]][[][][[][]][][[[[]]]]]]][[[]]]]][[][]][][]; // 0x20C
+	private float ][[[]]][[[[[[[[]]][[[[[[[[[]][][][]][][]][]][[]; // 0x210
+	[SerializeField]
+	private float invisibleSwitchTimeout; // 0x214
+	[SerializeField]
+	private ParticleSystem invisibleStart; // 0x218
+	[SerializeField]
+	private GameObject invisibleLoop; // 0x220
+	[SerializeField]
+	private ParticleSystem camouflageStart; // 0x228
+	[SerializeField]
+	private float camouflageSwitchTimeout; // 0x230
+	[SerializeField]
+	private GameObject electricField; // 0x238
+	[SerializeField]
+	private GameObject staticCharge; // 0x240
+	[SerializeField]
+	private ParticleSystem shot180Effect; // 0x248
+	[SerializeField]
+	private ParticleSystem _halloweenBatsEffect; // 0x250
+	[SerializeField]
+	private ParticleSystem _coldHeartUltimateEffect; // 0x258
+	[SerializeField]
+	private GameObject speedMultiplierEffect; // 0x260
+	[SerializeField]
+	private GameObject _lowHealthSpeedMultiplierEffect; // 0x268
+	[SerializeField]
+	private GameObject radarEffect; // 0x270
+	[SerializeField]
+	private GameObject _fearEffect; // 0x278
+	[SerializeField]
+	private GameObject _voidEffect; // 0x280
+	[SerializeField]
+	private GameObject _fenrirAegisEffect; // 0x288
+	[SerializeField]
+	private ParticleSystem _fenrirShieldEffect; // 0x290
+	[SerializeField]
+	private ParticleSystem _healEffect; // 0x298
+	[SerializeField]
+	private GameObject _sleepEffect; // 0x2A0
+	[SerializeField]
+	private GameObject _smokeEffect; // 0x2A8
+	[SerializeField]
+	private GameObject _stanShotEffect; // 0x2B0
+	[SerializeField]
+	private GameObject _vampireEffect; // 0x2B8
+	[SerializeField]
+	private GameObject _poisonEffect; // 0x2C0
+	[SerializeField]
+	private GameObject _voidPoisonEffect; // 0x2C8
+	[SerializeField]
+	private GameObject _paralysisEffect; // 0x2D0
+	[SerializeField]
+	private GameObject _hammerangEffect; // 0x2D8
+	[SerializeField]
+	private GameObject _vineEffect; // 0x2E0
+	[SerializeField]
+	private GameObject _regeneratingShieldEffect; // 0x2E8
+	[SerializeField]
+	private GameObject _ghostEffect; // 0x2F0
+	private DestructibleProtectiveField [][[[][][[[[][[[[[]][[[[]][][[[[][[[[][[[[[]]][; // 0x2F8
+	private bool ][[]]]][[][][][[][[]]][][[[[][][[]][[]][[[[]][]; // 0x300
+	private GameObject [[]]][[][]]]]][[]]][[[[][[][][[[[[[]][[]][[[[[]; // 0x308
+	private bool ][[[]]][]]][[]]][[][[]][][]][[][[[]][[[[[[[[[[[; // 0x310
+	private Coroutine [][][][[]][[[[[]][[[]][[][[[[]][[[[[[[][[][]]][; // 0x318
+	private Quaternion []][[][[][[[]]]]]][[[][[[][]]]][[[][[[[]]][[][]; // 0x320
+	private Quaternion ]]][]]]]]][]]]]][[][[]][]][[]]]][]]][][][[]][[]; // 0x330
+	private Quaternion ]]]]][]][[]]]][]]][]]]][[][]][]][][[][][[][[[]]; // 0x340
+	private Coroutine ]]]][]][][]][]]]]]]]]]]]][[[][]]]]][][]][]][][[; // 0x350
+	private Coroutine ][[][]][[[[[[]]]][[[][][]][][]]][]]][][[[[[][]]; // 0x358
+	private bool []]]][[]]]]]]]]][]][[]]][]][]]]][[[]]][[[[][[]]; // 0x360
+	private bool ]][[[[[]]]]]][[[[]][][]][]]][[[[[[][][][][[][][; // 0x361
+	private bool [][][[[]]][][[]][[][][][]][[[[[[[[[[[][[]]][]][; // 0x362
+	private static List<Player> ]][[[[]]][[][][[]]][]]][]]][][][[][[][]]][]]]][; // 0x60
+	private int ][]][[[]]][[[][[[[[][[[][[][[][]]]][[][][[]]][[; // 0x364
+	private Bullet []][[[][[[[[[][[[[]]]]]]]]]][[][[][][]][[][]][]; // 0x368
+	[CompilerGenerated]
+	private Nullable<[][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]]> <[]]][[][[]][[][[[][][[[[][][[]]]]]][]][[[]]][][>k__BackingField; // 0x370
+	[CompilerGenerated]
+	private int <[]][][]][][]][]]][]]][[][[][[[]][[[[[[[][]][][[>k__BackingField; // 0x378
+	public static List<Player> ActivePlayers; // 0x68
+	[CompilerGenerated]
+	private static Action<Player> ]]]]]][[[]]]]]][[][[[[[[][][]]][[]][[[[][[]]]][; // 0x70
+	[CompilerGenerated]
+	private static Action<Player> ]][]]][]]]]][]][[]]][[[[[[]]]]]]]]]]]][[]][[[][; // 0x78
+	[CompilerGenerated]
+	private static Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> ][]]][[][]]][][[[[]]][[][[]]]][[[][[[]][[][]][]; // 0x80
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<float>> []][[]]]][[[]]]][[[[]][]][][]]]][[][[[[[[]]]]][; // 0x88
+	[CompilerGenerated]
+	private static Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> ][[][[][][]]]][]]][[[[][[[[[[]][[[[]]][[[]][]][; // 0x90
+	[CompilerGenerated]
+	private static Action<Player> [][]]][]][[[[][]]][][[[][][[][[[][[]][]]]]]]][]; // 0x98
+	[CompilerGenerated]
+	private static Action<Player> [[][[[[]]][][]][]][[[][]][]][[]][]]][[[]]][]][]; // 0xA0
+	[CompilerGenerated]
+	private static Action<Player, Bullet, int, int> []]][]][]]]][][[]]]][][][[[[[]]]]]]][]][][]][[[; // 0xA8
+	[CompilerGenerated]
+	private static Action []][[[]]]]]]]]][][[]][[]][][[][[][[]][]][[[][][; // 0xB0
+	[CompilerGenerated]
+	private static Action [[][[[]][][]][[[]]]]]]]][[]][[][[][][[][][]]][[; // 0xB8
+	[CompilerGenerated]
+	private static Action<Player, int, int> ][[[[[][[][[[][][[]][[[[[][[[][[]]]][[[]]][[[[[; // 0xC0
+	[CompilerGenerated]
+	private static Action<Player> [][]][][]][[[]]][][[]][[[]]][[][]]]]][][]]]][[]; // 0xC8
+	[CompilerGenerated]
+	private static Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [][[[[][][[]]]]]][[]][]][[]][[][]]]]][[[]]][[][; // 0xD0
+	[CompilerGenerated]
+	private static Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [][][[][]][][[[[[]][[[[[]]]][]][[[][[][][][][]]; // 0xD8
+	[CompilerGenerated]
+	private static Action [[[[]][][][[[]][[]][[]]][[]][[][]]]][]]]][[[[]]; // 0xE0
+	[CompilerGenerated]
+	private static Action ]]][[][][][]]]][][]]]]][[]]]]]]]][]][][[[[[[]][; // 0xE8
+	[CompilerGenerated]
+	private static Action ][][[]]][][[]][][]][]][[[[[][]]][]]][[][][[][[[; // 0xF0
+	[CompilerGenerated]
+	private static Action<Player> [][]]]]][[[[]]][[[][[]]]][[]]][]][[][[]]][][[]]; // 0xF8
+	[CompilerGenerated]
+	private static Action ]]][[[][][[[]][[[][[[][[][]]][[]][[][[[][]][[]]; // 0x100
+	[CompilerGenerated]
+	private static Action<Player> []]][]]]]][[]][[[]]]][[[]]][[[]][[[[[[[][]][[[]; // 0x108
+	[CompilerGenerated]
+	private static Action<Player> ]]][][]][]][[][]][][]][][[]]][[]]]]]]]][[[][[[]; // 0x110
+	[CompilerGenerated]
+	private static Action<Player> ][[[]][[][][[][[]]][][][]][][][[][[]][][[[[][][; // 0x118
+	[CompilerGenerated]
+	private static Action<ValueUpdater<bool>> ][[[]][[[]]]]]][[]][][][]][][[]]]][][[[][[][[][; // 0x120
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<int>> ][[[[][[[[[[]][]][][][][[][]]][]][[[][][[[[[][[; // 0x128
+	[CompilerGenerated]
+	private static Action<Player, Bullet, ValueUpdater<float>> ][]]][][][[][[[[[][[[][]]]][]][[[][[]][[[][]]]]; // 0x130
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<float>> ]][][[[][[[[][][[][]]]]]][[]]][[][]][[[[[][[][[; // 0x138
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<byte>> []]]]]]]][]]]]][][[]][][[[][]][]][]][[[[]][][[[; // 0x140
+	[CompilerGenerated]
+	private static Action<Player, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>> [][[[]][[][[[[[]]][]][[[[]]][]][[[[][][[[][]][[; // 0x148
+	[CompilerGenerated]
+	private static Action<Player> ][[[]]][][[]]][[[[]]]][][[][]]][[[[]][]]][][][]; // 0x150
+	[SerializeField]
+	private Canvas[] _worldCаnvases; // 0x380
+	[SerializeField]
+	private Collider kinematicShield; // 0x388
+	[SerializeField]
+	private Collider grabBallCollider; // 0x390
+	[SerializeField]
+	private Transform _aimIndicator; // 0x398
+	[SerializeField]
+	private Image _aimIndicatorLeft; // 0x3A0
+	[SerializeField]
+	private Image _aimIndicatorRight; // 0x3A8
+	private int ][[[][[[[]][][][[[[[[][][]][[[]][[[]][[[][][]][; // 0x3B0
+	private string ]]][[[]]]][]]]]]][]]]]][[[]][][[[[[[]]]][]]]]][; // 0x3B8
+	private bool ]][[[[][]]][[[[]]][]][[[[[[[[]]]]][[][[]][[[[]]; // 0x3C0
+	private ArcTarget ]]]][][[][[[[[[[]]]][][]]]]][[][][[]][[[]][[][[; // 0x3C8
+	private Image ][]]]][]]][[]][[[][[]]][[[[][]][[][]][[]]]]][[]; // 0x3D0
+	private Color [][][]]]][]][[[[[[][]]]]]]][][[[[[]]][][[[[[[[]; // 0x3D8
+	private Color []]][[][][[][[][][]]]]][]]]]]][[[]]][[][[[[[[[[; // 0x3E8
+	private UITankHud [[[]][[[[]]]]][[]][[][[]][[]][][]][[][][[][[][[; // 0x3F8
+	private int ][[[[[]][]]]]]]]]][[]]]][][[[]]]]][]]]][[[][]][; // 0x400
+	private Coroutine [[][][[]]]]][[[[]]][[]][[][][[]][[][[]]]][]][]]; // 0x408
+	private Rigidbody [[][]][[]]]][[[]]][][]][]][[[][[][[[]]]]][]][[]; // 0x410
+	protected BoxCollider []][]]]]]][[][][[[][[][][[[[][[[][[][[][[[[[[]]; // 0x418
+	private bool ][[[[]]]][][][[][][][][[[][]][[]]][[][][][][][[; // 0x420
+	private bool [][]][[[]]]][][[[[[][[[[[][]]]][[]][]]]]][[][[]; // 0x421
+	private float []][[[[[[[[]][[][[[[]][[]]]][]][[[[[][[][]]][[[; // 0x424
+	private float ]]]]]][]][[]]][]][[[[[[[[][[][][][][][][[[][[][; // 0x428
+	private float ]][]]]]][][[[[[]]][]]]]]]]]][[]][][][]][][]]][]; // 0x42C
+	private float ][]][[[][]]][]]]][[][[[[[]][][[[][[]][[[]]]][[]; // 0x430
+	private float []]]]]]]][[][]]]]][]][][[]][[[[[[[[]]]][][[]][[; // 0x434
+	private List<Bullet> ][[[[][[][[]][[[][]]][]]]][]]][][][[][][[][[]][; // 0x438
+	private List<Bullet> [[[]]][[][][[][[[][[[][[[[[[]]]][]]][[]]][[[[][; // 0x440
+	private List<List<Bullet>> ]][[]]]]]]]][[[][[[[]]][[[][][][]]][][]][[[[[[[; // 0x448
+	private Coroutine ]]]]][]][[]][[[][]][[][]]][]][[[[[][]]]][][[[]]; // 0x450
+	private byte ]][]]][[[]][[]][[]]][]][[[[]]]][]][]][][][]]][[; // 0x458
+	private int[] [[[][]]][][[]]]]][][]]][[[[[]]][[[][]]][]][[]][; // 0x460
+	private ObscuredInt[] ][][[[][]][][[[]][[[][][][[]][][[]]][[][]]]]][]; // 0x468
+	private ObscuredFloat [[[]][]]]][[[[[[][[[[][[[[][[[]][][[[[]][[[[[[[; // 0x470
+	private ObscuredFloat ][][]][[]][[[[[[[]]]]]]]]]][[]][]]][[]]][]][[[]; // 0x488
+	private bool ]]][]]][[[][][[]]]][[]][[]]]][[[]]]][][]]][][[[; // 0x4A0
+	private float [[[[][]]][]][[[]][][[][]]]][[[[]][[]]]]][]]][[]; // 0x4A4
+	private float ][[[[[[][[[][[]]][[[[]]]]]]][][[][[][[[[]]][[][; // 0x4A8
+	private bool ]][[[][[[][[][[[][][[[[]][]]]][]][[][][][][[[[[; // 0x4AC
+	private ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[[][]][[[]][[][[][]][[[]]][[[]][[][[][[[]][]][; // 0x4AD
+	private TeamIndicator ]][][]]][]]]][[]][][]][][][][][][[[[]]][[]][[]]; // 0x4B0
+	private Player.]][[[][[][[]]]][[[[][[[]]]]]][][][[[[[][][]]][] ][[][]]]][][][][[[]][][[[]][]]]]][[[[[[[][]]]][; // 0x4B8
+	private ObscuredInt [][]][][[[]]]][]][][[[[]]][[[[[[]][][[]]]]]]][[; // 0x4C0
+	private ObscuredFloat ]][]]][][][[[[[]]][[[[[][][[[][][[[][]]]]]][[]]; // 0x4D4
+	private ObscuredFloat [[[]]][[][][][]]][]][][]]][[[[][]]][[[]][[[[[][; // 0x4EC
+	private ObscuredFloat ][[]][][[]]][[[]][[][[][[][[]][]][][][[]]][[[][; // 0x504
+	private ObscuredFloat ]][[[][][]][[][][[]][][]][[[]]][][]]]][][][]]]]; // 0x51C
+	private List<GameObject> ][[][][[]][[[][[[]][[[[][[[[[]]][[][[[]]][]][[[; // 0x538
+	private ]]][[]][[]]][[]]][][]]][[[[[[]]]]]][][][[[][[[[ ]][]]]]][[[]]][[][]]]][]][[[[[]]]]]]][][[[[[]]]; // 0x540
+	private Coroutine ][[[[][]]]]][]]][[[][[[[][][[[]][[[[[[][[[]]][[; // 0x548
+	[CompilerGenerated]
+	private static Player <[[]][]]][]][]]][[[][]]][[][][]]][[[[]][[[]][][]>k__BackingField; // 0x158
+	private Vector3 [][[]][[][[[[[[[]]][][]][[[]]]]][[[][[]]]]][[]]; // 0x550
+	[CompilerGenerated]
+	private float <[]][][]][][[[][[][]]]]]][][[][[][][[[[]]]][][[]>k__BackingField; // 0x55C
+	[CompilerGenerated]
+	private ObscuredInt <[[]]][][[][[]]]]]]]][]]][]]]][[[[]][[[]][[]][[]>k__BackingField; // 0x560
+	[CompilerGenerated]
+	private ObscuredFloat <[][[][][[[]]]][[][][[[[][]]][]][][][[[[[[]]][[[>k__BackingField; // 0x574
+	[CompilerGenerated]
+	private ObscuredFloat <][[[][]]][]]]]][[]]]][]][[][]][][][[][[][][[][]>k__BackingField; // 0x58C
+	[CompilerGenerated]
+	private string <[[[]][[[]]]][][]]]][[][[]][[[[[[][]][[][[][]]]]>k__BackingField; // 0x5A8
+	[CompilerGenerated]
+	private bool <][[]][]]]]][]]]][][[[[]][[[[][[][]]][][][][[[[]>k__BackingField; // 0x5B0
+	[CompilerGenerated]
+	private string <]]]][]][[][][[]]][[[[]][[][][][[[][]][[[[][]][]>k__BackingField; // 0x5B8
+	[CompilerGenerated]
+	private int <][]]][]][]][[][[][[[[][][]][][]]]][]][[[[][[[]]>k__BackingField; // 0x5C0
+	[CompilerGenerated]
+	private int <]]][[]]][]][[[]][][][[]][]]][]][]]][][]]][[]][]>k__BackingField; // 0x5C4
+	[CompilerGenerated]
+	private int <[[][][[]]]][[]]]]][[[[][[][]]][[][][[[][[[]]]]]>k__BackingField; // 0x5C8
+	[CompilerGenerated]
+	private int <[[]]][]]][][][[[[][]][[[]][[[[][]][[[[]]][[][]]>k__BackingField; // 0x5CC
+	[CompilerGenerated]
+	private [[][[][]]][[][[][[[[[][[][][]]]][[]]][[[[]][[][ <][[][[[[][[][[][[]]]]][][]][[][[]][][][[]]][]]]>k__BackingField; // 0x5D0
+	[CompilerGenerated]
+	private ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] <][[[]]]]]]]][][][[[[][][[][[]]]]][][[]]]]][]][]>k__BackingField; // 0x5D8
+	[CompilerGenerated]
+	private SkinType <[[]]][[]]][]][][][[[[][[[]][[]]]]]]][[[[]]]]]][>k__BackingField; // 0x5E0
+	[CompilerGenerated]
+	private ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] <]]]][[[[[][[[[]][][[[]]][][[[][[][[]][][[[][]]]>k__BackingField; // 0x5E8
+	[CompilerGenerated]
+	private ][][]][]]]]][[]][[[]][][[]][[][[][][[][]][]]][[ <][]][]]][[][[[[]][[[[[[]][][]][][[[[[[]][]]][[]>k__BackingField; // 0x5F0
+	[CompilerGenerated]
+	private []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ <]]]][][[[][][][[[[[[][]][]][]][][][][][][]]]]]]>k__BackingField; // 0x5F8
+	[CompilerGenerated]
+	private SkinType <[]][]]][]]][]][[[[[][[]]][][][[][[][][][][]]][]>k__BackingField; // 0x600
+	[CompilerGenerated]
+	private []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ <]][][[[][[]][]][]][[]]]][[[]]]][]][[][][[]][[[[>k__BackingField; // 0x608
+	[CompilerGenerated]
+	private ]][[]]]][][[]][[[[][][[][[[][[]][[][][]][]][]]] <][]][]]][][[]]][][][][][[]][[[][][[[]]][[[[][][>k__BackingField; // 0x610
+	[CompilerGenerated]
+	private ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] <][[[[]][[][[[][][]][]][]][[]]]][][]][][][][]]]]>k__BackingField; // 0x618
+	[CompilerGenerated]
+	private ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] <]]][[[]][[]][[[[[[[[[[][[][[][[]][][]]][[]]][[[>k__BackingField; // 0x620
+	[CompilerGenerated]
+	private ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] <]]][][[[][]][[][[[[]][[][[[][][][[[[[[]]]][[[[[>k__BackingField; // 0x628
+	[CompilerGenerated]
+	private ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] <[][]]][[[]][[][[][]][[[[[][[][]][]]][[]][[[][[]>k__BackingField; // 0x629
+	[CompilerGenerated]
+	private bool <]][[[]][[[][]][][]][]][][[]]][]][][][[]]][[[[[[>k__BackingField; // 0x62A
+	[CompilerGenerated]
+	private float <]][[][][][[][][]][[[[[[[[]][][[]]]]]]]][[]][]][>k__BackingField; // 0x62C
+	private ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[][[[[]][[[[[]]]]]]]]][[[[[[[[]][[][[[[[[[]]][; // 0x630
+	private ObscuredFloat ][[[[]]]][]]][[]]][[[[]][[][][]]]]]]][][[][[[[]; // 0x634
+	[TupleElementNames(new[] { "Type", "Value" })]
+	private ValueTuple<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]], ObscuredFloat> [[][[][]]]][[[[[[]]]]]][[[][]]][]][][[[][]][]]]; // 0x64C
+	private ObscuredFloat [[[]][][[[[[][[]]][][[[][[[][[]][][[[[]][]]][]]; // 0x668
+	private ObscuredFloat ]]]][]]][][[[]]][]][][[[[]]]]]][[]][[][[]][]]][; // 0x680
+	[CompilerGenerated]
+	private ObscuredInt <]][[][]]]][[]]][]][[[[][[]][][[[[][][[[[][[]]]]>k__BackingField; // 0x698
+	[CompilerGenerated]
+	private ObscuredBool <[]]]]]]]][[[[][]][]][][][[[[[][[][[][]][][][[]]>k__BackingField; // 0x6AC
+	[CompilerGenerated]
+	private AimMode <][]]]][][]]]]][][]]][][]][[[[[[[[[[[[[[[]][][]]>k__BackingField; // 0x6B8
+	private bool [][][[[][][][[]]][[[][][]]]]]][[]]][]][]]][]]][; // 0x6BC
+	private bool [][[[]][]]]][[]]][]][]]][][[[]]][]][[][][[][[[]; // 0x6BD
+	private Nullable<bool> ]]][[[[]]]][]]][[[][[[]]][][[][][]]]]]][][][[[]; // 0x6BE
+	[CompilerGenerated]
+	private int <]][[[][[[[][]]]]][[]]]][][[[[]][][][[[][[[]][[[>k__BackingField; // 0x6C0
+	[CompilerGenerated]
+	private float <[[[[[[[][[[]][[[[]][]]]][[[]]][][[[]]]]]][[][][>k__BackingField; // 0x6C4
+	[CompilerGenerated]
+	private bool <[]]]][]][[]][[][][[[[[]][[]][][[[[[][][]]]][[[]>k__BackingField; // 0x6C8
+	[CompilerGenerated]
+	private bool <[[]][[[[][]]][[[]]][[[]]][][[][]][[[][]]][]]]][>k__BackingField; // 0x6C9
+	[CompilerGenerated]
+	private bool <][][][[[[][][]]]]]][[][[][[[][[[[][[[][[[[[][[]>k__BackingField; // 0x6CA
+	[CompilerGenerated]
+	private bool <[][[][[[[[]][]]][]][[]][][[]][[][]]]][[[][[]][[>k__BackingField; // 0x6CB
+	[CompilerGenerated]
+	private float <[[][][[]][]][[[][[[[[][[][[[[[][][][[][][][[[]]>k__BackingField; // 0x6CC
+	private Transform ]][[[[]][][][]][]][]]][[[[][][[]]][[][[[[]][[[[; // 0x6D0
+	private Coroutine []]][]][][][]]]][[[[[[]]][[[[[][[[]][]][[[][][[; // 0x6D8
+	private float [[[]][][[[[[][[]]][[[]]]]][[][[[][][][][]][]]][; // 0x6E0
+	public float moveSpeedEv; // 0x6E4
+	private Coroutine ]][[][][]][[[][]]]][[[][[][]]][][[][[[[[[[[]][]; // 0x6E8
+	private CullableItem [][[[[[[]][[[]][]][][]]]]]][[[[][][[[][[][][[[[; // 0x6F0
+	private Vector3 []]][]][[]][]]]][[]]][[]][][[[][][[]][[]][][][[; // 0x6F8
+	private int ][][]][][][[[]]]]]]][[[[[[[[[[]][[[]][[][[[]][[; // 0x704
+	private bool [][][[[[[][[]]]][[[[[[[][]]][[[]]]][][[]][][][]; // 0x708
+	private bool ][[]][][[[]][]]]][][]]][]][[[[]]]]]]]]]][]]][[[; // 0x709
+	private bool [[[]]][[][[[]][]]][[[]]]]][]]]]][[[][[[]][[[[][; // 0x70A
+	public Vector3 dirdir; // 0x70C
+	public float lastControlledTime; // 0x718
+	private bool []][][]][][][][][[[[]][]]][[][[]]]]][[][[[[]][]; // 0x71C
+	private NavMeshHit [[[][][]]][][]][]]][[[]][[[][[[[]][]]]]][[[]]]]; // 0x720
+	private float [[[]][][][[[]]]]]][][[]][][[[[[][[[[]][][][[[[[; // 0x744
+	private ObscuredFloat []][[][[][[][[[[][[]][[[]]]]]][][][][]]][]][[][; // 0x748
+	protected Vector3 ][][[[[[][][[]][]]]]]][][][[]][]]]][[][[][]]]]]; // 0x760
+	private Dictionary<Player, float> [[[[]]][]][[]][]]]][[[]][][[]]][][]]][][[[[[[[[; // 0x770
+	private List<Player> [[]][]]]]]][][[]]]]][[][[]]][][]]][]]][]][][]][; // 0x778
+	private float ]][][][][[[]]][[][]][[]]]]][][]][[]]]][[[][][][; // 0x780
+	private float ]][[][[[[[[[][[[[[[]][][[[[][]][]][]][[[]]]]]][; // 0x784
+	public List<Player> radarDetectedPlayers; // 0x788
+	private ObscuredFloat ][][][[][[[]][]][[[[]]][[][[[][[][[[][[]]]]][]]; // 0x790
+	private Coroutine ]][][][[]][][[[]][[[][[[][][[]][][[[][[[][]]]]]; // 0x7A8
+	private float [][]][][[][]]][[][]][[[[[[[[[[[[][[]]][[[[[[[[]; // 0x7B0
+	private List<Player> [[][[]]][]]][[][[[][[]][][]]]][[][[[[[[]]]]]][]; // 0x7B8
+	private Dictionary<Player, Vector3> [[[[[][[]][[][[[[]][]]][][[]]]][[][[][][][]]][[; // 0x7C0
+	private Player [[][[[[[[]][[[[]][]]]]][[]]]]][][][][[]]]][][][; // 0x7C8
+	private Vector2 ]][[[[[[][[][[[[[[[[[]]]]]]]][[][[[[[[[][[]]]]]; // 0x7D0
+	private Vector2 ][][[[]][]][[][]]]]]]][][[[[[[[[[][[]]][][[[][]; // 0x7D8
+	private float ]][][[[[[[[]]][][][]][[]][]][]][[[[]][]][[]][]]; // 0x7E0
+	private float []]][[[[[][[]][[][]]]]][[[[[[]]]]][][[[[][][[[]; // 0x7E4
+	private Collider[] ][[[]][[[[[]][][[[[[]][]][[][][]]]][[[[][[][[[]; // 0x7E8
+	[SerializeField]
+	private GameObject _localBall; // 0x7F0
+	[SerializeField]
+	private GameObject _localBallMarker; // 0x7F8
+	[SerializeField]
+	private SearchPlayer _searchObject; // 0x800
+	private Dictionary<[]]]][]]]][[]][][[][][[]]][][]]]]]][]]][]][[[]], PlayerDOTBullet> [][[[]][[[[[]]]][[[[][[]][]][]][][[[][[]][[]][]; // 0x808
+	private Coroutine ][[[][[][][]][]]]]][[[[[[][][[[][]][[]]][[[][[]; // 0x810
+	private Coroutine [][]][][]]][]][[[][]]][][]]]]]][[[][[][[[][][[[; // 0x818
+	private bool ][][[[[][[][[[][[]]][[]]][[[]][][[[][[][[][[][]; // 0x820
+	protected bool ]]][[[]]][][[[[][][[[][][[[][][[]][][[[[]][[[[]; // 0x821
+	private Coroutine ][[]]][]][[[[[[]][]][][][[[]]]]][][]][[]]]]]]]]; // 0x828
+	private static readonly Dictionary<string, Dictionary<string, string>> ][][][[[[][[[[][][[][[[]][[][][]][]][[][]]][]][; // 0x160
+	private static readonly List<Player.[][][[[][[]]]]]]]][[]][][[[[[[[][[][]]]][]][][[> ]][[[]]][[]]]]][[]][[[[][[[][][[]][][[][[]][][[; // 0x168
+	private readonly Player.[][][[[][[]]]]]]]][[]][][[[[[[[][[][]]]][]][][[ [][[[[[[][[[][]][]][[[[[][[]]][[[[[]]]][]]][[]]; // 0x830
+	[CompilerGenerated]
+	private static Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> ]]][]]]]][[[[[[[[]][[][][[]][[][]][]][]]][]]][]; // 0x170
+	[CompilerGenerated]
+	private static Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> ][[[]]]]]][[[[[]][]][[[[[[][]][[]][][]][][][[[]; // 0x178
+
+	// Properties
+	public TankIngame ]]]]][][[[][[][[[]]]][[]]][[[][[]]][[]]]]]]][][ { get; }
+	public bool [[[]][[]]][[]][]]][]]]][[]]][][][[[[[[[]]][]][[ { get; set; }
+	private ObscuredInt []][]]][][[]][]][[[[[]][][][][[]][]]]][]]][[][[ { get; set; }
+	public float [[]][]][[][][[[]][[[[]]][[][[[]][]][][][[[[]]][ { get; set; }
+	public float ]]][][]][[][][]]]][[]]][]][[[[]]]]][[[]][[[][[] { get; }
+	public bool ]][][]]][][[[[]][[[][][][][[]]][]][][[[[[][[[]] { get; }
+	public AccumulativeShield ][][[[][][[][]][][[][][[[[][]]]]][][[[[]][[][[[ { get; set; }
+	public bool ][][[]]][[][[]][[[][][[[]][[[[[[][[][]]]][[]][] { get; set; }
+	private bool ][]][[]][]][[]]]][[][[][][][][]]][[[]][]][[][[[ { get; set; }
+	public bool [[[]]]][[[]]]]][[][[[[][][]]]]]][][[[][][][]]]] { get; }
+	public bool [[[][[[[[[][]][[]]][][][]]][]]]][][[[[]][[]]][[ { get; }
+	public bool [[[[[[[]][][]][]]]]][[[][]][[[[][]]]][[[[[[][[] { get; set; }
+	public int []]]][][[[][][[][[[][[]][]]][]][[[][][[[[]]]]]] { get; set; }
+	public bool []][]][[][][[][[[][]][[][[]][[[[][[[][[[]]]]]][ { get; set; }
+	public bool []][[]][][][][[[[][[[][]][[][[[[]]]][[[[]][[][] { get; set; }
+	public bool [[][[[[[[][[[]][]][]][[[[[[][[[[[[][[][]]][[]]] { get; set; }
+	public bool ]][][[]]]]][]]][][[][[]]]][[]]][[[[[[[][[[[][[] { get; }
+	public Nullable<[][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]]> [[[][]]][[]][[[[[]][][[]]]]][][]]]][[[[[]][[][] { get; set; }
+	public bool [[[]][]]]][][]]]][[[][[]]][][[[][[][[[][][][]][ { get; }
+	public int [[][[][][]]]][]][][[[[][[][[][[][[[[[[[][]]][[] { get; set; }
+	public Collider [[][]][]]]][[[]]][][[[[]]][]][][[[[][]]][]]]][[ { get; }
+	public static Player [[[[[[[[]]]]][][]][][[]][][[[]]][[]]]][][[[]][[ { get; set; }
+	public virtual bool ][]]][[]][[[[][]]]][[[][]]]]][[[]]][[[[][[[]][] { get; }
+	public bool ]][]]]][][][][[][[[[[[[]][][][[[]][[[[]]][][]]] { get; }
+	private float [[]]][][]][]]]][[[]]][[[[[][]][]]][][[][[[]]]][ { get; set; }
+	public ObscuredInt [][[[]][[[]][]][[[[]][]][]][]][[[[][[][][[]][[] { get; set; }
+	public ObscuredBool [][]][[[[[[[]]][[[][[[][[]]][[][]]][][]]][][[[] { get; }
+	public ObscuredFloat [[][[[[[][[]][[][]]]][[][[][[][][[]][]]][]]][[] { get; set; }
+	public ObscuredFloat ][]][[]]]]]]][]][[]]]]][][[[[]][[]][]][[[[[[][[ { get; set; }
+	public int [][][][[]][[]]][][[]][[]][][]][]][]][[[[][]]][[ { get; set; }
+	public string ]][[[[][][[]][[[]]][[]]]]]]][[]]]][]]]][][[[[[] { get; }
+	public string ][[[][[][]]]][]]][]][[[][][[[]]][[][][][]]]][[] { get; set; }
+	public bool ]][[[[]]][[[[]]]][[[[[]]]]][[[[]][]][][]]]][[[[ { get; set; }
+	public string [[[]][]][]]]]][][][]]]][]][]]]]]]][[]]][[[[[[][ { get; set; }
+	public int ][][[[][[][[[[[[[][[][][[[][][[][[][[[]][[[][[[ { get; set; }
+	public int [][[[]]]][][]]]][[][[][[[][][[][][]][[]]]]]][][ { get; set; }
+	public int ]][]][]][]][[][][][[]][[[[][][[][]]]]]][[[[][]] { get; set; }
+	public int [[[[][]]]]][[]][[[[[[[[[[[][]][[]][[[[][[][]]]] { get; set; }
+	public [[][[][]]][[][[][[[[[][[][][]]]][[]]][[[[]][[][ ]][]]]]][[]]]]]][[[[]]][[]]]]]][[[]]]]][]]]][[[ { get; set; }
+	public ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] ]][]]][]][][[][][[]]]][]]]]][][[[][][[]]]][[]]] { get; set; }
+	public SkinType [][][]]]]][[][][[[[]][]]][[][[[][[][]]][[[][[][ { get; set; }
+	public ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] [[][[[]]][[[[[][][][][[][[]][]][][]]]][[]][][]] { get; set; }
+	public ][][]][]]]]][[]][[[]][][[]][[][[][][[][]][]]][[ [[[][]]][]][[][][][]][[[][[[]][[[]]]][]]]]]][[] { get; set; }
+	public []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ ]]]][]]]]]]][[[[[[]]][[[]]][[][[][]]]]][[[][[]] { get; set; }
+	public SkinType [][[][]]]][][][[]][]]][][]]]][[[[[[[][][]][][[[ { get; set; }
+	public []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ ]][][]][][[]][[][[][]]]][[]][][]]]]]]][[]]][][[ { get; set; }
+	public ]][[]]]][][[]][[[[][][[][[[][[]][[][][]][]][]]] [][]][[]]][[][[]]]][[[[][][[][][[[[[][[[[][[[][ { get; set; }
+	public ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] ]]][]][]][][[][][[]]][][[]]]]]]][][]][]]][[][]] { get; set; }
+	public ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] ][][]][[[][]]][][[]][][[]]]]]]]]][[[[[[]]][]][] { get; set; }
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ][[][[]][[[][[[]][[][][]][][][[[][[[[][[[][]]]] { get; set; }
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ][[[]]][][][[][[[[]][[][]]][][][[[][]][][][[[[] { get; set; }
+	public UITankHud ][[[[[][][[]]]]][[[][][][[[][[[[[[]][][[[][[]][ { get; }
+	public bool [[[][[[][][][[[][[]][[]]][[[[[[][[[[[][[[[[][][ { get; set; }
+	public bool [[[][][[][]][]][[[[]]]]]][]][[[][][]]]][[][]][] { get; }
+	public virtual bool [][[[[[[[][[[[[[[[[[[[[[[][[][]][]]]]]][[]][][[ { get; }
+	public bool ][[[][[][[[][]][[[]][[[[[[]][]]]]][[][[]]]]]]]] { get; }
+	public float []]][[]][]][][[]]]]]][[]]]][]]][[][]]][][[[[[]] { get; set; }
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [][]]]][[[[][]]][[[[]]]][]]][][[[[][[]][[]][][[ { get; set; }
+	public ObscuredFloat [[[][][]]][[]]][[]][[]][]][[[]]]][]][][[]][[[][ { get; set; }
+	public ObscuredInt ][[[[]]][[]][][][][][][[][]]][[]][[[[[][[]][[][ { get; set; }
+	public ObscuredBool [[]][[[[[]]]]]]][]]]]][]][]][]]]]][[][]][][]]]] { get; set; }
+	public bool ]][[]]][][[[][[][]][]][][[]][[[[][[[]]][][][][] { get; }
+	public AimMode [[[[][[[][]][][[[]]][[][]][][[[[][]]][[[]][][][ { get; set; }
+	public bool [[[][[[][][[][[[][][[]][][][[][]][]]]]]][[[]][[ { get; }
+	public bool ][[[[[[[]][]][[]]][[[]]]][][[[[]][[][[][[]]]]][ { get; }
+	public bool ][[[][[[[]][][[]]]]]]]]]]][[[[]][[[[][[[][[]]][ { get; set; }
+	public bool [[[]][[][][[[[][]]][]][][[]][[]]][[[[]][[[][[]] { get; set; }
+	public bool ][]][][[][[[[]]]][[[][]][][][][[]][[[[[[][[]][] { get; }
+	public int ]][]]][[[][]][]][[]]]][]][[]]]][][]][][][]]]]][ { get; set; }
+	public float [][]]][]][[]][]][[]][[][[][][][][[][[[]]][[[]]] { get; set; }
+	public bool ][]][][][][[][[[[[][]]][][][[[[][][[][][[][]][[ { get; }
+	public bool ]]]]]][[]]]][[]][[]][]]]][][]][]][[[]][[[[]]][] { get; set; }
+	public bool [[[]]][]]][[]][[[[][]]]]][]]]][[[]]][][[][][][] { get; set; }
+	public bool [[][[[][[[][]][[][]]]][][[]][][[][[]][[][]][][] { get; }
+	public bool ]]]][]]]]]][][]]]][]]]]][[[]]][[[[[[]][[[[[][[] { get; }
+	public bool ]]]]]][[[][][]]][][]]]][[][[[][][]]][[]][][]][] { get; }
+	public bool ][]][][[[[[]]][[[[][]]]]][[]][[][[][[][[[[[][[] { get; }
+	public bool ][[[[[[[[[][[]]]][][][][][[]]]]][[][[[[[]]]][][ { get; }
+	public bool ][]]][][[[[]][[[[]]]][[][[][[][]][]]]][][[[]][] { get; set; }
+	public bool []][]]][[[[][[][]][]]]]][]][[[[[[[[[[[]]][[[[]] { get; }
+	public bool ][][[[][[[]][[][][[[[[[[[]]]][]][[]][[[]][]][]] { get; set; }
+	protected bool ][][][][]][][][[[[[[][[][]][[]][[[[]][][[]]][[] { get; }
+	public bool [[[]][][[]][[][]][][][]][[[]][]][][[[[]]][]]][[ { get; }
+	private float []]][[]][]]][][[[][[][[[[][][[[[[[]][[]][][][][ { get; }
+	private float ]][[[[[[[[][[][[[][[[]][[][[[][[[[]][[[]]][][[[ { get; }
+	private float ][[]]]]][[[[[][[[[[][[][]]][]]]][]][[][]][]]]][ { get; }
+	public float ]][]][]]][[[[[[[[[[[]]][]][[][][][[[[][[[[][[[[ { get; set; }
+	public bool [[[][[]]][[]]]][]]]][[[[]]][][]]]]][]]][[[][[[] { get; }
+	public Vector3 ]]][]]][][[][[]]]]]][][]][][[][[[[[[[[[[[[]]]]] { get; set; }
+	public Dictionary<Player, float> [[][][[[][][[[[[]]][][[][[[[[[]]]]]][]]]][[][]] { get; }
+	public float ]][][][][[]]][][[[]][]]]]]][[[[]][]][][[[[[[[[[ { get; }
+	public float ]][[[]]]]][[[]]]]][[][[[][]][[]][]][][[[[[[[][] { get; }
+	public GameObject ][[]]][]][][][]][]][]]]][[[][][[]]]][[[]][[]]]] { get; }
+	public SearchPlayer [[[]]]][]][[][[][[[]]][[[]][[]][[[]][]][[][][[[ { get; }
+	public bool ][][][[][[][[]]][]][[][]]]]][]][]]]]][][][[[[]] { get; }
+	// Methods
+	// RVA: 0x1EB7E44 Offset: 0x1EB3E44 VA: 0x1EB7E44
+	private void [[[[[]][[[[][[[]][[][[[][][][[]]][][]]]]][][]]](bool ][]]][]]][[[[][][]]][[][]]]]][][]]]][]]][][]][]) { }
+	// RVA: 0x1EB7F9C Offset: 0x1EB3F9C VA: 0x1EB7F9C
+	private void ][[[][]]]][][[]]]][][]]][[[[][[][]][[]][[][][[]() { }
+	// RVA: 0x1EB7FEC Offset: 0x1EB3FEC VA: 0x1EB7FEC
+	private static void []][][]]]]][[]][]]]][][]]][][][[][[[][][]][[]][(BattleType [[][[[][][[]]]]]]][[[]]]][[]][][[][[[[[]][[[][[, bool [[[[][][]]][][[][[][]]]][[]][]][[[][[]][]]][[[]) { }
+	// RVA: 0x1EB80B0 Offset: 0x1EB40B0 VA: 0x1EB80B0
+	public void CleanBulletsStack(Bullet []]][]]][[[[[[][][][][]]]][[][[[[[][]]]][][]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EB8200 Offset: 0x1EB4200 VA: 0x1EB8200
+	public static void remove_DamageTaken(Action<Player, Bullet, int, int> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EB82F4 Offset: 0x1EB42F4 VA: 0x1EB82F4
+	public void TakeDamage(Bullet []]][]]][[[[[[][][][][]]]][[][[[[[][]]]][][]][[, float []][][][]][][]][[[[[]][[[[[]]][]]]][]][]]][[[]] = 1) { }
+	[CompilerGenerated]
+	// RVA: 0x1EBBC34 Offset: 0x1EB7C34 VA: 0x1EBBC34
+	public static void add_RespawnEffectStarted(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBBD28 Offset: 0x1EB7D28 VA: 0x1EBBD28
+	public ObscuredFloat get_Speed() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBBE34 Offset: 0x1EB7E34 VA: 0x1EBBE34
+	public ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] get_CommanderLevelConfig() { }
+	// RVA: 0x1EBBE3C Offset: 0x1EB7E3C VA: 0x1EBBE3C
+	public bool IsArtillery() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBBEAC Offset: 0x1EB7EAC VA: 0x1EBBEAC
+	private void []][]]][]]]]]]]][][][[[[[]][[]]]][[]][][[]]]][](bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EBBEB8 Offset: 0x1EB7EB8 VA: 0x1EBBEB8
+	public void set_BushId(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[IteratorStateMachine(typeof(Player.[]]]][]]][]]][][[[[[[][[]][[]]][]][][[[[[[]][]]))]
+	// RVA: 0x1EBBEC0 Offset: 0x1EB7EC0 VA: 0x1EBBEC0
+	private IEnumerator [[][][[[[[]]][]]][]]][[[][][[[]]][][]][[[][]]][([][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]]) { }
+	// RVA: 0x1EBBF38 Offset: 0x1EB7F38 VA: 0x1EBBF38
+	private void ]]][]]][]][[[[]][]][[[]][[[[]][[][[][][[[][[[[](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EBCE30 Offset: 0x1EB8E30 VA: 0x1EBCE30
+	public static void remove_ShotAbilityUsed(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBCF24 Offset: 0x1EB8F24 VA: 0x1EBCF24
+	public void ResetetInvaderSetup() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBCFA0 Offset: 0x1EB8FA0 VA: 0x1EBCFA0
+	private void ][][]][[[][[[][[[[[[[][][]]]]][]][]]]][[][[]]][(][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EBCFA8 Offset: 0x1EB8FA8 VA: 0x1EBCFA8
+	public ObscuredFloat get_NextReloadTime() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBCFC0 Offset: 0x1EB8FC0 VA: 0x1EBCFC0
+	public float get_NextShotTime() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBCFC8 Offset: 0x1EB8FC8 VA: 0x1EBCFC8
+	public static void add_ConsumableUsed(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBD0BC Offset: 0x1EB90BC VA: 0x1EBD0BC
+	public void ToggleColliders(bool [[[]]]][]]][][]]][[[][]][[][][][][]][[][[]]][]]) { }
+	// RVA: 0x1EBD118 Offset: 0x1EB9118 VA: 0x1EBD118
+	private void [][[][][[[[][][[[][[]][]][]]]]][]][][[]]]]][][[() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBD234 Offset: 0x1EB9234 VA: 0x1EBD234
+	public static void remove_RespawnEffectStarted(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBD328 Offset: 0x1EB9328 VA: 0x1EBD328
+	public int IncreaseKills(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	// RVA: 0x1EBD4F8 Offset: 0x1EB94F8 VA: 0x1EBD4F8
+	private void ][][]][[[[[[[]]]][[[]]][[[]]][][[[]][]][][[][]](Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	// RVA: 0x1EBDA7C Offset: 0x1EB9A7C VA: 0x1EBDA7C
+	private void ][[[]][[][[[[[][[[[[]][[][][[][][]][][][][][[[](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], bool [][]][[[[][[]][[[]]][[][[]][[][[[[[[[[][[[]]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EBDE4C Offset: 0x1EB9E4C VA: 0x1EBDE4C
+	public bool get_IsFastShoot() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBDE54 Offset: 0x1EB9E54 VA: 0x1EBDE54
+	public static void remove_ShootDenied(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBDF48 Offset: 0x1EB9F48 VA: 0x1EBDF48
+	private float ]][]][]]]][][]][][][[[[][]][][]]][][[]][]]][[]]([[][[]]][[][]][][[][][][]][]]][]]][][]]]][[]]]] []][[][[[[[][][]]][][]]][[[][][[[[][[[[]]][[[[[, Vector3 [][]]][]][[[[][]]]][[]][][[]]][[]]][[[]]]]]][[[, Vector3 [[[]]][[]]]]]][]]]]][[]]][][[[][]][[[][[][[[][], float [[[][]]][[]][][[[][[[[]][[[]]][]][][][[[[][]][], Transform ][][[][]]]]]][[[[][][[[]]]][]]]]]][]]]]]]][[][[) { }
+	[IteratorStateMachine(typeof(Player.][[]]][]][][]][]]][]][[]]][][][]]]]]]][[]][[][[))]
+	// RVA: 0x1EBE860 Offset: 0x1EBA860 VA: 0x1EBE860
+	private IEnumerator ][]]]]]][][][]][[[][[][[][[[[][]][[[][[[][[[[][() { }
+	// RVA: 0x1EBE8C8 Offset: 0x1EBA8C8 VA: 0x1EBE8C8
+	private void ]]]]][[[]][][][][]][[][[[[][[[]]]]]][[][][]]][]() { }
+	// RVA: 0x1EBEABC Offset: 0x1EBAABC VA: 0x1EBEABC
+	public void OnScore(Player [][[]]]][[][]][][][[]][]]][[[]]]][[[[[[][[][][[, int ][]]][[]][][[]][[[][[[][[[]]]]]][[[[]]]][[[][[]) { }
+	// RVA: 0x1EBF0C0 Offset: 0x1EBB0C0 VA: 0x1EBF0C0
+	public bool get_CanIgnoreBossProtection() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBF0C8 Offset: 0x1EBB0C8 VA: 0x1EBF0C8
+	public bool get_IsPlayWithFriends() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBF0D0 Offset: 0x1EBB0D0 VA: 0x1EBF0D0
+	public static Player get_Local() { }
+	[CompilerGenerated]
+	// RVA: 0x1EBF128 Offset: 0x1EBB128 VA: 0x1EBF128
+	public ObscuredBool get_IsAlive() { }
+	// RVA: 0x1EBF138 Offset: 0x1EBB138 VA: 0x1EBF138
+	private void [[[[[]][][][]][][]][]]]][]]][[[][[][][]][][][[[(Bullet []]][]]][[[[[[][][][][]]]][[][[[[[][]]]][][]][[, Vector3 [[[]]]]]]]]]]][[]][]][[]][][]]]]][[][]]]][][]][) { }
+	// RVA: 0x1EBF5B0 Offset: 0x1EBB5B0 VA: 0x1EBF5B0
+	public bool IsVisibleForPlayer(Player ]]][[[[][]][]][]]]]]]][]]]]]]][]]]][[]][[][[[]], bool ]]]][[]]][[[]]]][]][[][]][]]]]]][]][[[[[[[[]][] = True) { }
+	// RVA: 0x1EBF8A8 Offset: 0x1EBB8A8 VA: 0x1EBF8A8
+	public int GetOtherTeamIndex() { }
+	// RVA: 0x1EBF9B0 Offset: 0x1EBB9B0 VA: 0x1EBF9B0
+	public int GetKillsWithoutDie() { }
+	// RVA: 0x1EBFAC4 Offset: 0x1EBBAC4 VA: 0x1EBFAC4
+	private void []]]][[]]]]][[]][[][[]][][]]]]]]][]][][[][[[[[[() { }
+	// RVA: 0x1EBFBE0 Offset: 0x1EBBBE0 VA: 0x1EBFBE0
+	public int get_UserId() { }
+	// RVA: 0x1EBFBE8 Offset: 0x1EBBBE8 VA: 0x1EBFBE8
+	public void .ctor() { }
+	// RVA: 0x1EC03C4 Offset: 0x1EBC3C4 VA: 0x1EC03C4
+	public void Update() { }
+	// RVA: 0x1EC2D4C Offset: 0x1EBED4C VA: 0x1EC2D4C
+	public bool IsVisibleForLocalPlayer(bool ]]]][[]]][[[]]]][]][[][]][]]]]]][]][[[[[[[[]][] = True) { }
+	// RVA: 0x1EC2E48 Offset: 0x1EBEE48 VA: 0x1EC2E48
+	private float ]][[][]]][[][][[[[][[][[[[[]]]][[[][[][]]][[]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC2FB4 Offset: 0x1EBEFB4 VA: 0x1EC2FB4
+	public static void remove_TargetHit(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC3090 Offset: 0x1EBF090 VA: 0x1EC3090
+	private void [[][]][[[]][[][[[]][[][[][[[[][[]]]][][[[[]]]]](bool ][[[[][[[]][[[[]]][[[[][[[][][[]][[][][[]]]]][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC31E0 Offset: 0x1EBF1E0 VA: 0x1EC31E0
+	private void [[][]][[[]][[]]]][[][][]]][][]][][][][]][[[][[](][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC278C Offset: 0x1EBE78C VA: 0x1EC278C
+	private void ]]]][][][[]]][][[][]]]]]]][][[[[[]][[][[][]]]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC35EC Offset: 0x1EBF5EC VA: 0x1EC35EC
+	public static void remove_LocalShotStarting(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC36C8 Offset: 0x1EBF6C8 VA: 0x1EC36C8
+	public void SetFootballGoals(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][], int [[][]][]][]]][]]]][[[][]][]]]]]][][]][[[]]][[]]) { }
+	// RVA: 0x1EC3CBC Offset: 0x1EBFCBC VA: 0x1EC3CBC
+	public void CmdExplode(int ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[ ]][][]]]][[[][[][]][][[][[][]]][][][]]]]][][]][) { }
+	[IteratorStateMachine(typeof(Player.[]]]]]][]][][[]]][][[]][[][]]][][][[[[][[]][[[]))]
+	// RVA: 0x1EC3F1C Offset: 0x1EBFF1C VA: 0x1EC3F1C
+	private IEnumerator [[[[[[[[]][]][][[][[][][]][]][[][[][[[]]][[[]][(Vector3 []]][[]]]]][][[][[]][]][[[]][[[][[[[[[[][[[]][]) { }
+	// RVA: 0x1EBE7B8 Offset: 0x1EBA7B8 VA: 0x1EBE7B8
+	public bool get_IsHiddenByBush() { }
+	// RVA: 0x1EC3FCC Offset: 0x1EBFFCC VA: 0x1EC3FCC
+	private void ][][][][[[[][[[[[[]][]][]]][]][[[]]]]][[][[[[][() { }
+	[PunRPC]
+	// RVA: 0x1EC4360 Offset: 0x1EC0360 VA: 0x1EC4360
+	protected void ToggleShield(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[, bool ]]][][[][][[[[]]]]]][[]][]][]][]][]][[]][[][][]) { }
+	// RVA: 0x1EC463C Offset: 0x1EC063C VA: 0x1EC463C
+	public TankIngame get_Holder() { }
+	// RVA: 0x1EC4644 Offset: 0x1EC0644 VA: 0x1EC4644
+	public void SetAcidSpeedMultiplier([[][[]]][[][]][][[][][][]][]]][]]][][]]]][[]]]] ]][][][][[[]]][[[]]][][]][[][][[[][[[][][[[[[][) { }
+	// RVA: 0x1EC4780 Offset: 0x1EC0780 VA: 0x1EC4780
+	private void [[]][][][[]][]][][[[]][][][[[[][]][][[]][[]]]][(float [[][[][]]]][]]][]][]][[]][]][[[][[[]][][]][][[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC47AC Offset: 0x1EC07AC VA: 0x1EC47AC
+	public ObscuredInt get_LoadedBurstCount() { }
+	// RVA: 0x1EC47C0 Offset: 0x1EC07C0 VA: 0x1EC47C0
+	public bool IsActiveAbilityReady() { }
+	// RVA: 0x1EBBA88 Offset: 0x1EB7A88 VA: 0x1EBBA88
+	private void [[[]][]]]][]]][][[]][[[][][][][][]][][[][[]]]][() { }
+	// RVA: 0x1EC4998 Offset: 0x1EC0998 VA: 0x1EC4998
+	public void ShowHealEffect() { }
+	// RVA: 0x1EC4A64 Offset: 0x1EC0A64 VA: 0x1EC4A64
+	private ObscuredInt ]]]]][][]]]]]]]]][[[[[][[[]][][[][][][[[]]][]]]() { }
+	// RVA: 0x1EC4A78 Offset: 0x1EC0A78 VA: 0x1EC4A78
+	public void SplitterBossUltimateReset(bool ][][][]]][][[[][[[][[][[[[][[[][[[[]]][[[]][][[ = False, bool ][[[[]][][]][][]]][[[[][]][[[[[[]]]][[]]]][][[] = False) { }
+	[PunRPC]
+	// RVA: 0x1EC4BD0 Offset: 0x1EC0BD0 VA: 0x1EC4BD0 Slot: 62
+	protected virtual void AddAchievement([[]]]]]][]][]][[]][]][][][][]][[[[][]][[[[[[][[ [[[[][][[]]][][[][][[]]]]]][]]][[[][][][[]]]]]]) { }
+	// RVA: 0x1EC4C44 Offset: 0x1EC0C44 VA: 0x1EC4C44
+	public int GetAssists() { }
+	// RVA: 0x1EC4D58 Offset: 0x1EC0D58 VA: 0x1EC4D58
+	private float ]]][][][[[]][[[][[]][][[[]]]]]][][[[[[[[][]][]]() { }
+	// RVA: 0x1EC4E74 Offset: 0x1EC0E74 VA: 0x1EC4E74
+	public byte GetResourceCount() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC4F50 Offset: 0x1EC0F50 VA: 0x1EC4F50
+	public static void add_ShootDenied(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC5044 Offset: 0x1EC1044 VA: 0x1EC5044
+	public bool get_CanIgnoreBullets() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC51B8 Offset: 0x1EC11B8 VA: 0x1EC51B8
+	private void [[[]]][][[[]][][][]]]][]][]][]][[][][[][[[[[][](ObscuredFloat [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC51D0 Offset: 0x1EC11D0 VA: 0x1EC51D0
+	public static void add_CanIgnoreBossProtectionToggled(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC52C4 Offset: 0x1EC12C4 VA: 0x1EC52C4
+	private void [[[][][[][[[]]]][]]]]][][][[[]][[[[][[[]][]]]][(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC52CC Offset: 0x1EC12CC VA: 0x1EC52CC
+	public void SetForcedPosition(Vector3 [[][[]]]][[[]][[[][]]][][]][]]]][[][[[]][][][]], Quaternion [][[[][]]]]][]][]][][[[[][[][]]]][]]]]][][[[[[[) { }
+	[IteratorStateMachine(typeof(Player.[][[[]][]][[[][][[[[][[[[]]][]]]]][]]][[[][[]]]))]
+	// RVA: 0x1EC537C Offset: 0x1EC137C VA: 0x1EC537C
+	private IEnumerator []]][[][]]]]][][[[][][][[[[][][[[]]][[]][][]]][() { }
+	[PunRPC]
+	// RVA: 0x1EC53E4 Offset: 0x1EC13E4 VA: 0x1EC53E4 Slot: 63
+	protected virtual void RpcExplode(int []][[][[[][]][]][[[[[[][[]][[[[]]]][[[[[[[[[]][, byte [[[][[]]]]][][[[[[[]]]]][]][]][][][[][[[][]][][, byte ][[]][][[[]][[]][][[]]]]][[[[][]][][][[[]]][][]) { }
+	// RVA: 0x1EC6BC0 Offset: 0x1EC2BC0 VA: 0x1EC6BC0
+	private void ][]]]]]]]]]][[]]]]]][[][][][[[[[][]][]][]]][][](int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC6C48 Offset: 0x1EC2C48 VA: 0x1EC6C48
+	public bool get_IsSpawning() { }
+	// RVA: 0x1EBEE68 Offset: 0x1EBAE68 VA: 0x1EBEE68
+	public void ToggleTank(bool [[[]]]][]]][][]]][[[][]][[][][][][]][[][[]]][]], bool ][]]]]]]][[[[[]][][][[]]][[[[[][[[]][[[[][][[[] = True) { }
+	// RVA: 0x1EC6D34 Offset: 0x1EC2D34 VA: 0x1EC6D34
+	public void StopPushImpulse() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC6D5C Offset: 0x1EC2D5C VA: 0x1EC6D5C
+	public static void add_SuppliesReseted(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC6E50 Offset: 0x1EC2E50 VA: 0x1EC6E50
+	public static void remove_AfterGoalStarted(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC6F2C Offset: 0x1EC2F2C VA: 0x1EC6F2C
+	private void ][][[[[][[][][[[]]][]]]]][[][[[[[[[]]]][][][[]](bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC6F38 Offset: 0x1EC2F38 VA: 0x1EC6F38
+	public int GetKillsInARow() { }
+	// RVA: 0x1EC704C Offset: 0x1EC304C VA: 0x1EC704C
+	public void OnHealthChange(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC7660 Offset: 0x1EC3660 VA: 0x1EC7660
+	public static void add_Spawned(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC7754 Offset: 0x1EC3754 VA: 0x1EC7754
+	public string get_Nick() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC775C Offset: 0x1EC375C VA: 0x1EC775C
+	public int get_RespawnIndex() { }
+	// RVA: 0x1EC7764 Offset: 0x1EC3764 VA: 0x1EC7764
+	private Vector3 ]]][][][][][]]][[[]][]]]]]]]]]]][][][]]][][][][(Vector3 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC79A8 Offset: 0x1EC39A8 VA: 0x1EC79A8
+	public ]][[]]]][][[]][[[[][][[][[[][[]][[][][]][]][]]] get_CommanderConfig() { }
+	[PunRPC]
+	// RVA: 0x1EC79B0 Offset: 0x1EC39B0 VA: 0x1EC79B0
+	protected void AbilityActivatedRPC(bool [[][][][[[]][[][[][[[[[[[[]]]][[][[][]]]]]][[[[) { }
+	// RVA: 0x1EC79BC Offset: 0x1EC39BC VA: 0x1EC79BC
+	private void ]]][]][[[[][]]]][[][[[][][[][[][[[[[[[][][][][]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC7A1C Offset: 0x1EC3A1C VA: 0x1EC7A1C
+	public void set_IsRevenge(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC7A28 Offset: 0x1EC3A28 VA: 0x1EC7A28
+	public static int GetTeamIndex(RoomInfo [[[][[[[[][[[[[][][]]]]][[[]]][]]][]][]][]][[]], int ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, bool []]]]]]][]][][[[]][[[[]]]][[]]][[]]][[[[[[]][[[, out [][[]]][]]]]][][[][]][[[]][]]][]][[[[[][[]][]][ []][][]][[][]]][][[]][[][[[][[[[]]][]]][[[[[]]], out int ][[][][][[][][[[]]][]][[[]]][]]]][][[[[]][[[][]) { }
+	// RVA: 0x1EC7B3C Offset: 0x1EC3B3C VA: 0x1EC7B3C
+	public bool CanIgnoreMines() { }
+	// RVA: 0x1EC7B4C Offset: 0x1EC3B4C VA: 0x1EC7B4C
+	private void [[[]]]][][][[][][[[]]][][][][]][[[][][][[[[]]]](Bullet []]][]]][[[[[[][][][][]]]][[][[[[[][]]]][][]][[) { }
+	// RVA: 0x1EC7DEC Offset: 0x1EC3DEC VA: 0x1EC7DEC
+	public void ShowAbilityIndicator(bool [[][][][[[]][[][[][[[[[[[[]]]][[][[][]]]]]][[[[) { }
+	// RVA: 0x1EC7EFC Offset: 0x1EC3EFC VA: 0x1EC7EFC
+	public void ResetAbility() { }
+	// RVA: 0x1EC7F04 Offset: 0x1EC3F04 VA: 0x1EC7F04
+	public void Heal(float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[) { }
+	// RVA: 0x1EC8168 Offset: 0x1EC4168 VA: 0x1EC8168
+	public SearchPlayer get_SearchObject() { }
+	// RVA: 0x1EC8170 Offset: 0x1EC4170 VA: 0x1EC8170
+	public void ApplyBursts(int [[]][[]]]]]][]]][[]][[][[]][[][[]][[][[][][[]][, int []][[]][[[[]]][][][[[[][][][[]][[]]]]]]][]]][[[ = -1) { }
+	// RVA: 0x1EC81CC Offset: 0x1EC41CC VA: 0x1EC81CC
+	public void RemovePlayerDOTBullet(PlayerDOTBullet []]][]]][[[[[[][][][][]]]][[][[[[[][]]]][][]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC8260 Offset: 0x1EC4260 VA: 0x1EC8260
+	public bool get_IsBattlePassBought() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC8268 Offset: 0x1EC4268 VA: 0x1EC8268
+	public static void add_BeforeExploded(Action<Player, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC835C Offset: 0x1EC435C VA: 0x1EC835C
+	public bool IsAssisted(Player ]][]]]]]][[[][][][[][[[[[[][[[]][][][[][][[[[[], Player [][]][]][][]][[]][[]][[][]]][]][]][][][][[]]][]) { }
+	// RVA: 0x1EC84A8 Offset: 0x1EC44A8 VA: 0x1EC84A8
+	private void [[][[]][][[[]][]]][[]][][]][]][[[][[[][]][[[[[[() { }
+	// RVA: 0x1EC84B8 Offset: 0x1EC44B8 VA: 0x1EC84B8
+	public void ToggleLocalBall(bool ][]]][]]][[[[][][]]][[][]]]]][][]]]][]]][][]][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EC86E4 Offset: 0x1EC46E4 VA: 0x1EC86E4
+	public static void add_ConsumableChanged(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC87D8 Offset: 0x1EC47D8 VA: 0x1EC87D8
+	public void AddBulletToBurst(Bullet []]][][[]]]]][[]][]]]][][][[[]][[[][[[[[][]]]][, Bullet ][[[[[][[[[][][][]][][[[[[[][]][][[[][[[[[[[[[]) { }
+	// RVA: 0x1EC8A6C Offset: 0x1EC4A6C VA: 0x1EC8A6C
+	public void ApplyIncreaseNextDamageMultiplier(float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[, float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]]) { }
+	// RVA: 0x1EC8B48 Offset: 0x1EC4B48 VA: 0x1EC8B48
+	private Player [[[]]][][[][[][][[]]][[]]]]]]]]]][]]]]][[]][[[[(Player [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][]) { }
+	// RVA: 0x1EC8CBC Offset: 0x1EC4CBC VA: 0x1EC8CBC Slot: 64
+	protected virtual void ][][[[]]][[]]]]]]]]]]]][][]]]]]]][[]]]]]][]]][[(BattleType ][[]]]][[][][]][[][]][[][[]][[][][]][]][[[]][][, int [[[[[][[]]]]][[[[][][[][]]]][][[][[]][[[[[]][[]) { }
+	[IteratorStateMachine(typeof(Player.][]]][[][]][]]]][][]][[[[][[]]][[]][][]][][]][[))]
+	// RVA: 0x1EC8CC8 Offset: 0x1EC4CC8 VA: 0x1EC8CC8
+	private IEnumerator ][]][]]][][[][]][][[[[][[][[][]][[[[][[[[][]]][(float [[[[[[[]]][]]][]][[[]]]][]][]][[[[[[]][]][]]]]], [][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]]) { }
+	// RVA: 0x1EC3A08 Offset: 0x1EBFA08 VA: 0x1EC3A08
+	protected static void ]]]][[[][[[]]]][[]]]][][[[]][][[[[[]][[[[[[]]][(Hashtable ]][[][]]][][]][[][]][]]]][[]][[][[][][]]]]]]][], Hashtable ]]][]][[[][[[][[[[]]][[[]]]][[]]]][[[][][[[][]]) { }
+	[PunRPC]
+	// RVA: 0x1EC8D50 Offset: 0x1EC4D50 VA: 0x1EC8D50
+	protected void RpcUseAbility(short [[]]][[[[[[[]]]]]]]][[[[[[[][[][][[][[][[[][][[) { }
+	[PunRPC]
+	// RVA: 0x1EC9EE0 Offset: 0x1EC5EE0 VA: 0x1EC9EE0
+	protected void CmdShootRegular(short[] []][[][][][][[]][[[]]][[]]]]]]][]]]]][[]]][]]][, short ]]]]][[]]][[]]][]]]]]][][]]][][[]][][[]]][][]][) { }
+	// RVA: 0x1EC9F30 Offset: 0x1EC5F30 VA: 0x1EC9F30
+	private bool ]]][[[]][[[][[]][[[]]][]][[[][[[][[[]]][][[[[[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EC9FEC Offset: 0x1EC5FEC VA: 0x1EC9FEC
+	private void ]][[][[[[][]][[][][[[][[[[[]][]]][[[[[[]]]]]]]](int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC9FF4 Offset: 0x1EC5FF4 VA: 0x1EC9FF4
+	public void set_HasPilot(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1ECA000 Offset: 0x1EC6000 VA: 0x1ECA000
+	protected void ToggleScorpionShield(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	// RVA: 0x1ECA160 Offset: 0x1EC6160 VA: 0x1ECA160
+	private void [][[][]][]]][[]]][][]]][][]][][[[[][[[[[[[[][[[(ObscuredFloat [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA174 Offset: 0x1EC6174 VA: 0x1ECA174
+	public static void remove_LocalPlayerHealthChanged(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA250 Offset: 0x1EC6250 VA: 0x1ECA250
+	private void ]][[]]]]][[[[]][[[[[]][[[][]][[]]][][][[[[[[]][(float [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA258 Offset: 0x1EC6258 VA: 0x1ECA258
+	public float get_UltimateChargingTimeLeft() { }
+	// RVA: 0x1ECA260 Offset: 0x1EC6260 VA: 0x1ECA260
+	public float GetDistanceToGas() { }
+	[PunRPC]
+	// RVA: 0x1ECA370 Offset: 0x1EC6370 VA: 0x1ECA370
+	protected void SpawnLandMine(Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[) { }
+	// RVA: 0x1ECA390 Offset: 0x1EC6390 VA: 0x1ECA390
+	private void ][]]]]][]]]][]][][[]]][[[[[[[[[[[[][]][[[[]][]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA43C Offset: 0x1EC643C VA: 0x1ECA43C
+	public static void add_LocalPlayerInitialized(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA518 Offset: 0x1EC6518 VA: 0x1ECA518
+	public void set_VisibleForEnemy(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1ECA524 Offset: 0x1EC6524 VA: 0x1ECA524
+	protected void Remove(bool ][[[[]][][[[]][[]][][[[[[[[[][[[]]]]]][][][[[[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECA9F0 Offset: 0x1EC69F0 VA: 0x1ECA9F0
+	public static void add_Exploded(Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECAAE4 Offset: 0x1EC6AE4 VA: 0x1ECAAE4
+	public int IncreaseResourceCount(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	// RVA: 0x1ECABA0 Offset: 0x1EC6BA0 VA: 0x1ECABA0 Slot: 44
+	public override void OnPhotonInstantiate(PhotonMessageInfo [[[]][[]][[[][[]][[[][[][][[[][][[]][[][]][[[][) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECB810 Offset: 0x1EC7810 VA: 0x1ECB810
+	private bool ]]]][[][[[[[][][][][]]][]]]]]]]][[[][[[]][]][[](Player [[[][[[[][[][]]]][][[][[[[[[]][][[][[[[][]]][][) { }
+	// RVA: 0x1EC26A0 Offset: 0x1EBE6A0 VA: 0x1EC26A0
+	private void ][[[]]][]][[][]]]]]]][[[[[][][]]][][[][][[][][]() { }
+	// RVA: 0x1ECB834 Offset: 0x1EC7834 VA: 0x1ECB834
+	public void SetSpeedMultiplier([[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[[]][[]][[]]][][][]][][][][]]]]]][[[[]]][[][]]) { }
+	// RVA: 0x1EC6C58 Offset: 0x1EC2C58 VA: 0x1EC6C58
+	private void ]]]][]][[]]][[]]]]]]]][[][[]]][][[[[[[[][][][[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ECCE14 Offset: 0x1EC8E14 VA: 0x1ECCE14
+	private void [[[][[[[[][[[]]]][[[]]][[][[][[[[]]]][]]]][[[[[(]][[]]]][][[]][[[[][][[][[[][[]][[][][]][]][]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECCE1C Offset: 0x1EC8E1C VA: 0x1ECCE1C
+	public int GetTotalResourceCount() { }
+	// RVA: 0x1ECCF30 Offset: 0x1EC8F30 VA: 0x1ECCF30
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] get_CurrentShootAbility() { }
+	// RVA: 0x1EB9FBC Offset: 0x1EB5FBC VA: 0x1EB9FBC
+	public int GetHealth() { }
+	// RVA: 0x1EBBFE4 Offset: 0x1EB7FE4 VA: 0x1EBBFE4
+	private void [[]][][]]]]][][][[]]]][]][]][][[[[[][[]][[][[[[(bool [][]][][][[][][][]]][[]]][]]]][[]]][]]]][]]][[[ = False) { }
+	// RVA: 0x1ECD19C Offset: 0x1EC919C VA: 0x1ECD19C
+	public bool get_IsShootInProgress() { }
+	[CompilerGenerated]
+	// RVA: 0x1ECD1AC Offset: 0x1EC91AC VA: 0x1ECD1AC
+	private void [[[]][][[][][]]]][]][][[[[[[]]][[]]]]]]][[][[[[([]][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECD1B4 Offset: 0x1EC91B4 VA: 0x1ECD1B4
+	private void ]]]][]][[[]]][][[[[[[[[]][[[]][]][[][]]]][]][[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ECD1D4 Offset: 0x1EC91D4 VA: 0x1ECD1D4
+	public static void add_AccumulativeShieldChargesChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECD2C8 Offset: 0x1EC92C8 VA: 0x1ECD2C8
+	private void [[[[]][]]]][[[][[]][][][[][[[[[][[[][[[[]][[]]]() { }
+	// RVA: 0x1EBB878 Offset: 0x1EB7878 VA: 0x1EBB878
+	private void [[][]]]][[][[]]][[][][[[[[][[][]]]]][[[]]]]]]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ECD3C8 Offset: 0x1EC93C8 VA: 0x1ECD3C8
+	public static void add_AmmoChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECD4BC Offset: 0x1EC94BC VA: 0x1ECD4BC
+	private float [][][][][][]]][][[][]][]][]]]][]][]][][]]]]][]]() { }
+	// RVA: 0x1EBB034 Offset: 0x1EB7034 VA: 0x1EBB034
+	public AccumulativeShield get_AccumulativeShield() { }
+	[PunRPC]
+	// RVA: 0x1ECB968 Offset: 0x1EC7968 VA: 0x1ECB968
+	protected void ToggleCamouflage(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[, int ]]]]]]][[[][]]][][[][][][[[]][[]][[[[[]][[[][]]) { }
+	// RVA: 0x1ECD7A0 Offset: 0x1EC97A0 VA: 0x1ECD7A0
+	private void [[][]][[[[][]][[]][]][[[]]][][[[[[][[[[]][[[[]](int ]]]][]]]]][[]]][]][[[]][[[]]]][[[[]]][][[[[[[][) { }
+	[CompilerGenerated]
+	// RVA: 0x1ECDA5C Offset: 0x1EC9A5C VA: 0x1ECDA5C
+	public ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] get_TurretLevelConfigOriginal() { }
+	// RVA: 0x1ECDA64 Offset: 0x1EC9A64 VA: 0x1ECDA64
+	private void ][][[[][][][[]]]][]][][]]][[[[][[[[[]][[]][]][](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[[[][]]][][]]]][]][[][[]][[[][[[][][]][][[[[][, Vector3 [[][[]]]][[[]][[[][]]][][]][]]]][[][[[]][][][]]) { }
+	// RVA: 0x1ECDA6C Offset: 0x1EC9A6C VA: 0x1ECDA6C Slot: 65
+	protected virtual bool ]][][]][[[[]]][]][]][[[][]]]][[[[]]]][[]][]]][]() { }
+	// RVA: 0x1ECD7AC Offset: 0x1EC97AC VA: 0x1ECD7AC
+	public void CmdRespawn([][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]] = 0, bool []][[][[][[][[][][[]][[][[[][[][]]][][][[]]][][ = False) { }
+	[PunRPC]
+	// RVA: 0x1ECF628 Offset: 0x1ECB628 VA: 0x1ECF628
+	protected void SetupSupply(byte ]][]][[[[]][]][]][[[][][[][][[[[][][[[[][[[[][]) { }
+	// RVA: 0x1ECFB4C Offset: 0x1ECBB4C VA: 0x1ECFB4C
+	private void ][]]][][][[[][][[][[][][][[]]]]]][][[[[]]]][[[[() { }
+	[PunRPC]
+	// RVA: 0x1ECFE60 Offset: 0x1ECBE60 VA: 0x1ECFE60
+	protected void ToggleInvis(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED0108 Offset: 0x1ECC108 VA: 0x1ED0108
+	private void [][[[][[][]]]][[]][][[]][][][][][[]]][[[[][]]]](int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED0110 Offset: 0x1ECC110 VA: 0x1ED0110
+	private void ]]][]][[[[[][][][[[[[][[[[[[][[]][]][][[]]][[[[(AccumulativeShield [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED0118 Offset: 0x1ECC118 VA: 0x1ED0118
+	private List<Player> ]]]][[[]][[[][][]][][[[]]][[]][]]]]]][][][[[]][([[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[[]][[]][[]]][][][]][][][][]]]]]][[[[]]][[][]], [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[][[][[]][][[][[]]]][][][[[[[][[]][[]][]][]][[) { }
+	// RVA: 0x1ED0268 Offset: 0x1ECC268 VA: 0x1ED0268
+	public int IncreaseFootballAutoGoals(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED0550 Offset: 0x1ECC550 VA: 0x1ED0550
+	public static void remove_ConsumableChanged(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1ED0644 Offset: 0x1ECC644 VA: 0x1ED0644
+	protected void CmdShootArc(short[] []][[][][][][[]][[[]]][[]]]]]]][]]]]][[]]][]]][, short ]]]]][[]]][[]]][]]]]]][][]]][][[]][][[]]][][]][, short[] []][]]][]]][[[[]][]][[[]]][]][][]][[[[[]][][[[]) { }
+	// RVA: 0x1ED0674 Offset: 0x1ECC674 VA: 0x1ED0674 Slot: 66
+	protected virtual bool [][][][][]]][[]][[[[][]]][]]]]]]][][[]]]]][]]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED067C Offset: 0x1ECC67C VA: 0x1ED067C
+	private void [][][[[][][]]][][][][[[]][][]][[][][[][[][[[]][(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED0688 Offset: 0x1ECC688 VA: 0x1ED0688
+	private void ]][]]][[]][][[[[][[]]][][]][[]]]][[[]][[]]]][]]() { }
+	// RVA: 0x1ED06B4 Offset: 0x1ECC6B4 VA: 0x1ED06B4
+	public void InvisOn() { }
+	// RVA: 0x1ED07B8 Offset: 0x1ECC7B8 VA: 0x1ED07B8
+	public int GetDeaths() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED08CC Offset: 0x1ECC8CC VA: 0x1ED08CC
+	public SkinType get_ChassisSkinType() { }
+	// RVA: 0x1EC1394 Offset: 0x1EBD394 VA: 0x1EC1394
+	private bool [[[][[[[]][[][]]][]][][][][][][]]]]]][[[][][]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED15B8 Offset: 0x1ECD5B8 VA: 0x1ED15B8
+	private void []][][[][]]][[[]][[[]][[]]]]][]]][[[]][]][[[]][() { }
+	// RVA: 0x1ED15E4 Offset: 0x1ECD5E4 VA: 0x1ED15E4
+	public bool IsVisibleForAnyEnemy(bool ]]]][[]]][[[]]]][]][[][]][]]]]]][]][[[[[[[[]][] = True) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED18F4 Offset: 0x1ECD8F4 VA: 0x1ED18F4
+	private void ]][[]][[][]][][][][][]][[[][[]][[]][][][][[[][[(ObscuredFloat [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED190C Offset: 0x1ECD90C VA: 0x1ED190C
+	private void ]][]]]]]][[[]][[[[[][[[]]]]]][]][]][]][][[][][[() { }
+	// RVA: 0x1ED1930 Offset: 0x1ECD930 VA: 0x1ED1930
+	private void ][[][[[[]][]]]]]]][][]][[][[[[]]]][[][[][]][[]](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[][][[[][]]][[[[]]][][][[][]]][[][][[[]][[[[]]) { }
+	// RVA: 0x1EC8018 Offset: 0x1EC4018 VA: 0x1EC8018
+	public bool get_CanHeal() { }
+	// RVA: 0x1ED1968 Offset: 0x1ECD968 VA: 0x1ED1968
+	private void []][][[[[][[][]][[][[][][[[][][][]]]]]]][][][[[(Hashtable ][[]]]]]]][[]]][[[]]][][]][][[][[]][][[[[]]]][[) { }
+	// RVA: 0x1ED1C20 Offset: 0x1ECDC20 VA: 0x1ED1C20
+	private void ]]]]]]][][[][[][][]]][][]][]]][[[[[][[][[[]]][[(bool ]][][[[[][]][]][[]]][]]][][][[]]][][][[]]][][[]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED1E68 Offset: 0x1ECDE68 VA: 0x1ED1E68
+	public static void remove_BeforeRespawnStarted(Action<ValueUpdater<bool>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECC948 Offset: 0x1EC8948 VA: 0x1ECC948
+	private void [[]][[[[[[][][[][]][[][]][]][[[]]][[[][]]]]]]]](bool ][[[[[]]]][[[[]]]]][]][]][[[][][[[]]][][]][[][[ = False) { }
+	[PunRPC]
+	// RVA: 0x1ED212C Offset: 0x1ECE12C VA: 0x1ED212C
+	protected void ToggleAegis(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED2224 Offset: 0x1ECE224 VA: 0x1ED2224
+	public void set_IsPlayWithFriends(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1ED2230 Offset: 0x1ECE230 VA: 0x1ED2230
+	protected void KamikazeRPC(Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[) { }
+	// RVA: 0x1ED2400 Offset: 0x1ECE400 VA: 0x1ED2400
+	private void ][[[]][]][]][][[][[[][][][[]][]][[]][][]]][[[[[() { }
+	// RVA: 0x1ED24FC Offset: 0x1ECE4FC VA: 0x1ED24FC
+	private static void []]][]]][]]][[[]][[][]]][]]]][[[[[]][[]]]]]]][[() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED266C Offset: 0x1ECE66C VA: 0x1ED266C
+	public static void remove_ShotAbilityReady(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED2760 Offset: 0x1ECE760 VA: 0x1ED2760
+	private void [[[[[][[[]][]]][][[[]][]][[[]]]][[][]]][]][]]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED276C Offset: 0x1ECE76C VA: 0x1ED276C
+	public static void remove_BeforeExploded(Action<Player, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[IteratorStateMachine(typeof(Player.][]][[]]][]][[[[[]][][[[[[][[][[]]][]]]]]]]]][[))]
+	// RVA: 0x1ED2860 Offset: 0x1ECE860 VA: 0x1ED2860
+	private IEnumerator []]][][][]]][[[[]][[[]]]]][[][][[[][[][[[[]]][]() { }
+	// RVA: 0x1ED28C8 Offset: 0x1ECE8C8 VA: 0x1ED28C8
+	public void ApplyPushImpulse(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[[[][]]][][]]]][]][[][[]][[[][[[][][]][][[[[][) { }
+	// RVA: 0x1ED2ABC Offset: 0x1ECEABC VA: 0x1ED2ABC
+	public void ShieldOn(bool ]]][][[][][[[[]]]]]][[]][]][]][]][]][[]][[][][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED2C0C Offset: 0x1ECEC0C VA: 0x1ED2C0C
+	public float get_NextBushHideTime() { }
+	// RVA: 0x1ED2C14 Offset: 0x1ECEC14 VA: 0x1ED2C14
+	public float get_LastKillTime() { }
+	// RVA: 0x1ED2C1C Offset: 0x1ECEC1C VA: 0x1ED2C1C
+	private void ]]][[[[]][[]][[][[][[[][[[[[][]][[]]]][[[]][[[]() { }
+	[PunRPC]
+	// RVA: 0x1ED2C48 Offset: 0x1ECEC48 VA: 0x1ED2C48
+	protected void RpcRegeneratingShield(short [][][][[[[][[[][]]]]][[[][[[[[][][[[][[]]]][][]) { }
+	// RVA: 0x1ED2C88 Offset: 0x1ECEC88 VA: 0x1ED2C88
+	public void set_CanHeal(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED2C94 Offset: 0x1ECEC94 VA: 0x1ED2C94
+	public static void remove_AbilityCooldownChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC2184 Offset: 0x1EBE184 VA: 0x1EC2184
+	private void ][][[[][[][[][[[[][[][[][[]][][[[[[[[]][[[][[][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED2D88 Offset: 0x1ECED88 VA: 0x1ED2D88
+	private void ]][[[[[[[][]]][][]]]][[][][]][][[[[[]]][[]][[[[() { }
+	// RVA: 0x1EC2578 Offset: 0x1EBE578 VA: 0x1EC2578
+	private void ]]]]]][]]]]][]][]]]][]]]]]][][[[[[[][[][][[]]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED2E9C Offset: 0x1ECEE9C VA: 0x1ED2E9C
+	public static void add_TargetHit(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED2F78 Offset: 0x1ECEF78 VA: 0x1ED2F78
+	public int IncreaseKillsInARow(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	[PunRPC]
+	// RVA: 0x1ED3034 Offset: 0x1ECF034 VA: 0x1ED3034
+	protected void RpcArtHitShot(byte [[[][[]]]]][][[[[[[]]]]][]][]][][][[][[[][]][][, short []][[][]][][]]][][[]][[][[][][[[][]][[[]][[]]][, short ][[[[]][]][[]]][][][][][]]]]]]][][[[][]]][][[][) { }
+	// RVA: 0x1EC7570 Offset: 0x1EC3570 VA: 0x1EC7570
+	private void ][[][]]][][][[][]]]][][][[]][][[]][][][][][]]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED31F0 Offset: 0x1ECF1F0 VA: 0x1ED31F0
+	public static void remove_DashShot(Action<float> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED32E4 Offset: 0x1ECF2E4 VA: 0x1ED32E4
+	public void set_IsInBush(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED32F0 Offset: 0x1ECF2F0 VA: 0x1ED32F0
+	public void CmdProtectiveFieldExplode() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED33F8 Offset: 0x1ECF3F8 VA: 0x1ED33F8
+	public static void remove_RoomPropertiesReset(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED34EC Offset: 0x1ECF4EC VA: 0x1ED34EC
+	private void ]]][[][[[[[[]][]]]]][]][]]][][]][[][]][[]][][][(Vector3 []]][[[][[[[]][]]][]][[[[[[[][]][[][][[][]]][[[, Vector3 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][], int [[[[[[[[[]]]][]]][[]]][]]]][[]]]]]][][[][[]][]] = 0) { }
+	// RVA: 0x1ED3898 Offset: 0x1ECF898 VA: 0x1ED3898
+	public Dictionary<Player, float> get_AssistCandidates() { }
+	// RVA: 0x1ED38A0 Offset: 0x1ECF8A0 VA: 0x1ED38A0
+	public void SetRelatedGunsDamageMultiplier(float ]]]][][][]][[[][]][]][[][][[]]]][][][[][]][[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED38A8 Offset: 0x1ECF8A8 VA: 0x1ED38A8
+	public static void remove_TankAppeared(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED3984 Offset: 0x1ECF984 VA: 0x1ED3984
+	private void ]]]][[[][[]]][][[[][[[[[]][[]][[[]]]][[[]][][]](AimMode [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED398C Offset: 0x1ECF98C VA: 0x1ED398C
+	private static void .cctor() { }
+	// RVA: 0x1ED4690 Offset: 0x1ED0690 VA: 0x1ED4690
+	private bool []]]][]]]][]]][[]]][]][[[[[][[[]]]]][]][[]][]]](Player [[[][[[[][[][]]]][][[][[[[[[]][][[][[[[][]]][][) { }
+	// RVA: 0x1ED47B4 Offset: 0x1ED07B4 VA: 0x1ED47B4 Slot: 67
+	protected virtual void ]][[][[][[]][[][]][]][][[][][[[][]][[[[[]][[]]](BattleType ][[]]]][[][][]][[][]][[][[]][[][][]][]][[[]][][) { }
+	// RVA: 0x1ED53CC Offset: 0x1ED13CC VA: 0x1ED53CC Slot: 52
+	public override void OnPhotonCustomRoomPropertiesChanged(Hashtable ][[]]]]]]][[]]][[[]]][][]][][[][[]][][[[[]]]][[) { }
+	// RVA: 0x1ED6168 Offset: 0x1ED2168 VA: 0x1ED6168
+	public void SetDisableShotTime(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]]) { }
+	// RVA: 0x1EC47D8 Offset: 0x1EC07D8 VA: 0x1EC47D8
+	public float GetActiveAbilityReadyPercent() { }
+	// RVA: 0x1ED629C Offset: 0x1ED229C VA: 0x1ED629C
+	public bool HasInvaderSetup(out byte [][[[][[]][]][][][]][]][]]][][][][[][[][[]]]][[) { }
+	// RVA: 0x1ED6320 Offset: 0x1ED2320 VA: 0x1ED6320
+	private void [[[[]]]][]]][[][][[[]]]]][]][[[]][]][[[[[][]]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6374 Offset: 0x1ED2374 VA: 0x1ED6374
+	public static void remove_LocalPlayerInitialized(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED6450 Offset: 0x1ED2450 VA: 0x1ED6450
+	public bool get_IsMoving() { }
+	// RVA: 0x1ED646C Offset: 0x1ED246C VA: 0x1ED646C
+	public float get_LastDieTime() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6474 Offset: 0x1ED2474 VA: 0x1ED6474
+	public ][][]][]]]]][[]][[[]][][[]][[][[][][[][]][]]][[ get_ChassisConfig() { }
+	// RVA: 0x1ED647C Offset: 0x1ED247C VA: 0x1ED647C
+	public float get_UltimateChargingTime() { }
+	// RVA: 0x1EC0BB4 Offset: 0x1EBCBB4 VA: 0x1EC0BB4
+	private void ][[]]]]]][[[][]]]][[][[][[][[][[[[[]]]]]]][][][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED650C Offset: 0x1ED250C VA: 0x1ED650C
+	public static void remove_SetupChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBEDAC Offset: 0x1EBADAC VA: 0x1EBEDAC
+	private void ][[[][[]]]]]][]]][[][]][]]][]][]]][[][[[[[]]]][(float [[[[[[[]]][]]][]][[[]]]][]][]][[[[[[]][]][]]]]], [][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]] = 0) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6700 Offset: 0x1ED2700 VA: 0x1ED6700
+	public ][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] get_TurretLevelConfig() { }
+	// RVA: 0x1ED6708 Offset: 0x1ED2708 VA: 0x1ED6708
+	public GameObject get_LocalBall() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6710 Offset: 0x1ED2710 VA: 0x1ED6710
+	private void ][][]][]]][]]]][][[[][][][][[][][[[[]][][[[[[][(float [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[IteratorStateMachine(typeof(Player.[]][[[[]][[][]]][][][][]]][][][][][][[][][][]]]))]
+	// RVA: 0x1ED6718 Offset: 0x1ED2718 VA: 0x1ED6718
+	private IEnumerator ]][[]]]][]]][][[]][[][][[[[]]][[[[[[[[]][[[]][](Vector3 ]]]]][]][[][[][[[]]][][[]]][[[]][[][[]][][]][[]) { }
+	// RVA: 0x1ED67A4 Offset: 0x1ED27A4 VA: 0x1ED67A4
+	public void ApplySpeedMultiplier([[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[[]][[]][[]]][][][]][][][][]]]]]][[[[]]][[][]], float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[, float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]], bool [][[][]]][[][]]]]][][[]][]]][[[]][[[[[][[[[[][[ = True) { }
+	// RVA: 0x1ED6898 Offset: 0x1ED2898 VA: 0x1ED6898
+	private bool ][][]][][[][]][[[][][][[[[[[]][[]][[[]]][][[[[[() { }
+	[PunRPC]
+	// RVA: 0x1ED6930 Offset: 0x1ED2930 VA: 0x1ED6930
+	protected void ElectricFieldChargeRPC() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6AD0 Offset: 0x1ED2AD0 VA: 0x1ED6AD0
+	public static void add_BeforeRespawnStarted(Action<ValueUpdater<bool>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6BC4 Offset: 0x1ED2BC4 VA: 0x1ED6BC4
+	public static void add_ShotAbilityUsed(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6CB8 Offset: 0x1ED2CB8 VA: 0x1ED6CB8
+	private void [][]]]]][][]][][[[[[]][[][[]]][[[][][[[[[[[][[]([]][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED08E4 Offset: 0x1ECC8E4 VA: 0x1ED08E4
+	private bool ]][[[][[][[][][]]]][[][]]]][][][[[][[[][][][[][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6CC0 Offset: 0x1ED2CC0 VA: 0x1ED6CC0
+	public static void add_AbilityCooldownChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[IteratorStateMachine(typeof(Player.]]][][[]][]][[[][]][][]][][[[[[[][]][]]][][[]]]))]
+	// RVA: 0x1ED6DB4 Offset: 0x1ED2DB4 VA: 0x1ED6DB4
+	private IEnumerator ]]]][][[[[[[]][[[][][[][[[]]]]][[[][]][][][[]][(bool [[][][][[][][[][[[][[[][]][[][]]][[]]]]]]]][[][, float [[[[]][[[][[]]]]]]]][]]]]]]]][[[[]]]][[]]][][][) { }
+	// RVA: 0x1ED6E40 Offset: 0x1ED2E40 VA: 0x1ED6E40
+	protected void OnPhotonSerializeView(PhotonStream [[[]]]][][[][][[][[]]][[]]]]][[[[]][[[[[[[]]][[, PhotonMessageInfo [[[]][[]][[[][[]][[[][[][][[[][][[]][[][]][[[][) { }
+	// RVA: -1 Offset: -1
+	protected static T [[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<T>(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[], T ][[[]]]]]]]]]]]][[[[[][][][][[[[]]]]][][]][][][) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x2309D6C Offset: 0x2305D6C VA: 0x2309D6C
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<bool>
+	|
+	|-RVA: 0x2309FA0 Offset: 0x2305FA0 VA: 0x2309FA0
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<byte>
+	|
+	|-RVA: 0x230A1CC Offset: 0x23061CC VA: 0x230A1CC
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1ED6F1C Offset: 0x1ED2F1C VA: 0x1ED6F1C
+	public bool get_IsUltimateCharging() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6F2C Offset: 0x1ED2F2C VA: 0x1ED6F2C
+	public bool get_IsFirstBlood() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6F34 Offset: 0x1ED2F34 VA: 0x1ED6F34
+	public []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ get_ChassisLevelConfig() { }
+	// RVA: 0x1EBB1A0 Offset: 0x1EB71A0 VA: 0x1EBB1A0
+	private void ][][][[][][[][[[[[[[[[[[[][][]][]]]]][[]][[]]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED6F3C Offset: 0x1ED2F3C VA: 0x1ED6F3C
+	private void [[]]][][]][[[[][][][]][[[]]]]][]][][[[[][[]]]][(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC202C Offset: 0x1EBE02C VA: 0x1EC202C
+	private void [[]][[][[][[[[][]]][[]][[][[][]][[]]][][][][]]]() { }
+	// RVA: 0x1ED6F44 Offset: 0x1ED2F44 VA: 0x1ED6F44
+	public void SetTotalResourceCount(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][], int [[][]][]][]]][]]]][[[][]][]]]]]][][]][[[]]][[]]) { }
+	// RVA: 0x1ECE8CC Offset: 0x1ECA8CC VA: 0x1ECE8CC
+	private bool []]][[]]][][]]][[][]][][[[]][]]][[]][]]]]]]]]][(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[) { }
+	// RVA: 0x1EBE800 Offset: 0x1EBA800 VA: 0x1EBE800
+	public bool get_IsCamouflageActive() { }
+	// RVA: 0x1ED711C Offset: 0x1ED311C VA: 0x1ED711C
+	public void InvisOff() { }
+	// RVA: 0x1ED721C Offset: 0x1ED321C VA: 0x1ED721C
+	private void [[]][]]][][][][]]]][]][[]]][][][[[][[[[[][[]]][() { }
+	// RVA: 0x1EC4944 Offset: 0x1EC0944 VA: 0x1EC4944
+	public float GetHealthPercent() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7250 Offset: 0x1ED3250 VA: 0x1ED7250
+	public static void remove_Teleported(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC3FA8 Offset: 0x1EBFFA8 VA: 0x1EC3FA8
+	public bool get_CanHideInBush() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7344 Offset: 0x1ED3344 VA: 0x1ED7344
+	public static void remove_ShotAbilityChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7438 Offset: 0x1ED3438 VA: 0x1ED7438
+	public static void add_RespawnStarted(Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED752C Offset: 0x1ED352C VA: 0x1ED752C
+	public void ToggleDamageMultiplier(bool ][][]][]]]]]]]]]]]][[[]]][[]][]][[][]][][[[]][]) { }
+	// RVA: -1 Offset: -1
+	protected void ][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<T>(string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[], T [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x230A4AC Offset: 0x23064AC VA: 0x230A4AC
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<byte>
+	|
+	|-RVA: 0x230A52C Offset: 0x230652C VA: 0x230A52C
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<short>
+	|
+	|-RVA: 0x230A5AC Offset: 0x23065AC VA: 0x230A5AC
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<int>
+	|
+	|-RVA: 0x230A62C Offset: 0x230662C VA: 0x230A62C
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<__Il2CppFullySharedGenericType>
+	*/
+	[CompilerGenerated]
+	// RVA: 0x1ED763C Offset: 0x1ED363C VA: 0x1ED763C
+	private void ]]]]][][]][]][[][]][[]]]][[][[]]][[]]][]][][]]](Nullable<[][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC451C Offset: 0x1EC051C VA: 0x1EC451C
+	private void ]][[]]][][[]][]][][][[][][[]]][]]][][][[[][][[[() { }
+	// RVA: 0x1EBB1EC Offset: 0x1EB71EC VA: 0x1EBB1EC
+	public void CheckAbilityReady() { }
+	// RVA: 0x1ED02A0 Offset: 0x1ECC2A0 VA: 0x1ED02A0
+	public int GetFootballAutoGoals() { }
+	// RVA: 0x1ED7644 Offset: 0x1ED3644 VA: 0x1ED7644
+	public int IncreaseFootballGoals(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7790 Offset: 0x1ED3790 VA: 0x1ED7790
+	public static void remove_SuppliesReseted(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7884 Offset: 0x1ED3884 VA: 0x1ED7884
+	private bool [][[[[[[]][]][[]]][][][]]]][[]]][[]][][[][[[[[[() { }
+	// RVA: 0x1ED788C Offset: 0x1ED388C VA: 0x1ED788C
+	public static bool IsBot(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7930 Offset: 0x1ED3930 VA: 0x1ED7930
+	public static void add_ShotDone(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED7A24 Offset: 0x1ED3A24 VA: 0x1ED7A24 Slot: 68
+	public virtual bool get_CanShoot() { }
+	// RVA: 0x1ECF278 Offset: 0x1ECB278 VA: 0x1ECF278
+	private void [[]][]][]][[[][[]]]][[]]][][[[[][]][]][]][][][](int []]][[[][][[][]][[]][]]][[][[]]][][[[[[][[][[[]) { }
+	// RVA: 0x1ED7B74 Offset: 0x1ED3B74 VA: 0x1ED7B74
+	private void [][][[[[][][[][[[][][[][[[[][[[][][]]][[[][[][[() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7E0C Offset: 0x1ED3E0C VA: 0x1ED7E0C
+	public bool get_VisibleForEnemy() { }
+	// RVA: 0x1ED7E14 Offset: 0x1ED3E14 VA: 0x1ED7E14
+	public int IncreaseKillsWithoutDie(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	// RVA: 0x1EBD984 Offset: 0x1EB9984 VA: 0x1EBD984
+	public bool get_IsMe() { }
+	// RVA: 0x1ED7ED0 Offset: 0x1ED3ED0 VA: 0x1ED7ED0
+	private void ][][][[[]][[[]][[][][[[[]]][[[][[[]]]][[[[[][[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7EF4 Offset: 0x1ED3EF4 VA: 0x1ED7EF4
+	public static void add_AbilitiesUpdated(Action<Player, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED7FE8 Offset: 0x1ED3FE8 VA: 0x1ED7FE8
+	private void ][[[][[][]][]][][[[][[[[]]]]]]]]]][]]]]]][[][[[() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8014 Offset: 0x1ED4014 VA: 0x1ED8014
+	private void [][][[[[[[]]]]][[]][[[]]]]][[][][]][[]]][][[]][([[][[][]]][[][[][[[[[][[][][]]]][[]]][[[[]][[][ [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: -1 Offset: -1
+	protected static T [[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<T>(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x2309048 Offset: 0x2305048 VA: 0x2309048
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<bool>
+	|
+	|-RVA: 0x230926C Offset: 0x230526C VA: 0x230926C
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<byte>
+	|
+	|-RVA: 0x2309488 Offset: 0x2305488 VA: 0x2309488
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<short>
+	|
+	|-RVA: 0x23096A4 Offset: 0x23056A4 VA: 0x23096A4
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<int>
+	|
+	|-RVA: 0x2309AB4 Offset: 0x2305AB4 VA: 0x2309AB4
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1ECABF4 Offset: 0x1EC6BF4 VA: 0x1ECABF4
+	private void [[]]][][[[][[[[]]]]][][[][]]][[][][][]]]][[][[[(bool ][]]]][[]]]]]][[][]][]]]][]]]]][[][][]][[][[[[] = False) { }
+	// RVA: 0x1ED8084 Offset: 0x1ED4084 VA: 0x1ED8084
+	public Collider get_Collider() { }
+	// RVA: 0x1ECF8D0 Offset: 0x1ECB8D0 VA: 0x1ECF8D0
+	private void ]]]]][]][][][[[[][[]]][[]]]][][][][[[][[][][[[](float []][]][][][][][][[]]][[[[[[[]]]][[[[[]][[]]]]][) { }
+	// RVA: 0x1EC9F10 Offset: 0x1EC5F10 VA: 0x1EC9F10
+	private void [[[[][][[[[[][][]]]][][[[]]]]][]]][][]][][[[][[(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], short[] []][[][][][][[]][[[]]][[]]]]]]][]]]]][[]]][]]][, short [[]]]][][]][][[][[]]][][][][[][]]]]]]]][[]]][[[, short[] []][]]][]]][[[[]][]][[[]]][]][][]][[[[[]][][[[]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8198 Offset: 0x1ED4198 VA: 0x1ED8198
+	public static void remove_AmmoChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED828C Offset: 0x1ED428C VA: 0x1ED828C
+	private void []][]][][[][]][[]]]][]]][][[[][]]][]]][][]][]][() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8294 Offset: 0x1ED4294 VA: 0x1ED8294
+	public static void add_UltimateChargingChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8388 Offset: 0x1ED4388 VA: 0x1ED8388
+	public int get_BushId() { }
+	// RVA: 0x1ED8390 Offset: 0x1ED4390 VA: 0x1ED8390
+	public void EnableRBMode(bool [][[[][][]]]]][]][]]]]]][]][]][[]][][[[][]]]]][) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8398 Offset: 0x1ED4398 VA: 0x1ED8398
+	public static void remove_AccumulativeShieldChargesChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED848C Offset: 0x1ED448C VA: 0x1ED848C
+	public int get_ClanFlag() { }
+	// RVA: 0x1EBD470 Offset: 0x1EB9470 VA: 0x1EBD470
+	public void SetKills(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8494 Offset: 0x1ED4494 VA: 0x1ED8494
+	public static void add_HealthChanged(Action<Player, int, int> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED8588 Offset: 0x1ED4588 VA: 0x1ED8588
+	private void ][]]]][[[[][[[][[[[][[[[[]][[[[][[][[[]][][[]][() { }
+	// RVA: 0x1EC0A74 Offset: 0x1EBCA74 VA: 0x1EC0A74
+	private void ]][][]]][[][][][[[][]]]][][[[][][]]]]]]]]]][[[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED85C4 Offset: 0x1ED45C4 VA: 0x1ED85C4
+	public bool get_IsInvisibilityActive() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED85CC Offset: 0x1ED45CC VA: 0x1ED85CC
+	public bool get_IsInBush() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED85D4 Offset: 0x1ED45D4 VA: 0x1ED85D4
+	public static void remove_HealthChanged(Action<Player, int, int> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED86C8 Offset: 0x1ED46C8 VA: 0x1ED86C8
+	private void [[[[][[[]][[[]]][[]][[[[[[[][[][][[][[[][][]][](bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC8030 Offset: 0x1EC4030 VA: 0x1EC8030
+	private void ]][[][[[[[]][[[[[][[[[][[]][]][][]][[[][]]][[][(int ][]]]][][[][]][[][[[[]]]]]][[][][]]]]][[]][[][[) { }
+	// RVA: 0x1ED86D4 Offset: 0x1ED46D4 VA: 0x1ED86D4
+	public void SpawnBot([[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[][[[][[][[[[[[]]]][]]][]]]][[]]][][]]][]]][[[, [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] ]]][]][][]]]]]][[][][][[[[[[]][[][]][]]][[[[[[], Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[, int ]]][[[[][][[]][[[[[[][[][][][[][[[]]][]]][[]][] = 0) { }
+	// RVA: 0x1ED891C Offset: 0x1ED491C VA: 0x1ED891C
+	public bool HasExtraUltimates(out int [[]][[]]]]]][]]][[]][[][[]][[][[]][[][[][][[]][) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8938 Offset: 0x1ED4938 VA: 0x1ED8938
+	public static void remove_BattleRoyaleBoosterTaken(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED8A2C Offset: 0x1ED4A2C VA: 0x1ED8A2C
+	private void [][[[][[[[[[[[[]][[]][[]]]]][][]][][]][][]][][]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8B04 Offset: 0x1ED4B04 VA: 0x1ED8B04
+	public static void add_PveWaveUpdated(Action<Player, ValueUpdater<byte>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED8BF8 Offset: 0x1ED4BF8 VA: 0x1ED8BF8
+	private void ][][][[]]][[[][[[]]][[[[]][][[[[[]][[[]]][][]][(bool ]][][[[[][]][]][[]]][]]][][][[]]][][][[]]][][[]) { }
+	[PunRPC]
+	// RVA: 0x1ED8C5C Offset: 0x1ED4C5C VA: 0x1ED8C5C Slot: 69
+	protected virtual void RPCSetDisableShotTime(byte [[[][[]]]]][][[[[[[]]]]][]][]][][][[][[[][]][][) { }
+	// RVA: 0x1EBB668 Offset: 0x1EB7668 VA: 0x1EBB668
+	private void [[]][[[]][[[][[][[]][[][]]]]]][]]][][][[[[[]]]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8F00 Offset: 0x1ED4F00 VA: 0x1ED8F00
+	public static void remove_ConsumableUsed(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED8FF4 Offset: 0x1ED4FF4 VA: 0x1ED8FF4
+	public SkinType get_TurretSkinType() { }
+	[PunRPC]
+	// RVA: 0x1ED8FFC Offset: 0x1ED4FFC VA: 0x1ED8FFC
+	protected void RPCSetSpeedMultiplier(byte [[[][[]]]]][][[[[[[]]]]][]][]][][][[][[[][]][][, byte [][]][[[[][[]][[[]]][[][[]][[][[[[[[[[][[[]]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED900C Offset: 0x1ED500C VA: 0x1ED900C
+	public ObscuredFloat get_NextReloadDuration() { }
+	// RVA: 0x1EC5570 Offset: 0x1EC1570 VA: 0x1EC5570
+	private void [[[][[][[[[]]]]]]][][][[][][[[[[][[[[]]][[[][[](int []][[][[[][]][]][[[[[[][[]][[[[]]]][[[[[[[[[]][, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[ ]][][]]]][[[][[][]][][[][[][]]][][][]]]]][][]][) { }
+	// RVA: 0x1EBE970 Offset: 0x1EBA970 VA: 0x1EBE970
+	private float ][[[[]]]][][]]][[]][]][][[]][[][]][]]]][[][[][]() { }
+	// RVA: 0x1ED9404 Offset: 0x1ED5404 VA: 0x1ED9404
+	public int IncreaseAssists(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED94C0 Offset: 0x1ED54C0 VA: 0x1ED94C0
+	public static void add_TankAppeared(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED959C Offset: 0x1ED559C VA: 0x1ED959C
+	public bool AddPlayerDOTBullet(Player ][]][[[][]][]]]]]][][[]][][]]][[[[][[[]][]]]]][, PlayerDOTBullet ][][[[]]][][][]][[[][[[[]]]][[[[]][[]]]][][]][], [[][[]]][[][]][][[][][][]][]]][]]][][]]]][[]]]] []][[][[[[[][][]]][][]]][[[][][[[[][[[[]]][[[[[) { }
+	// RVA: 0x1ED96AC Offset: 0x1ED56AC VA: 0x1ED96AC Slot: 35
+	public override void OnMasterClientSwitched(PhotonPlayer [][[[[[]][[[[[][[][[[]]][][[]][[][[][[]][[][[[[) { }
+	// RVA: 0x1ED9870 Offset: 0x1ED5870 VA: 0x1ED9870
+	public void AddVampireHealth(int [[][][][[]]][][]][[]][[][[[[][[][[[[][]][[[][[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED9A00 Offset: 0x1ED5A00 VA: 0x1ED9A00
+	private void []][][]]]][[][]]]][][][[[][[[][[][][][[][[[]]][(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1ED9A0C Offset: 0x1ED5A0C VA: 0x1ED9A0C
+	private void ]][]]][[[]][[]][[][[[[[][[]][[]]][][]][[[[[[[]](string [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED9A14 Offset: 0x1ED5A14 VA: 0x1ED9A14
+	public bool CanShootThroughWall() { }
+	// RVA: 0x1ED9AE4 Offset: 0x1ED5AE4 VA: 0x1ED9AE4
+	public int GetConsumableCount(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ][[]]]][[][][]][[][]][[][[]][[][][]][]][[[]][][) { }
+	// RVA: 0x1ED7B30 Offset: 0x1ED3B30 VA: 0x1ED7B30
+	public ObscuredBool get_HasLoadedBursts() { }
+	[CompilerGenerated]
+	// RVA: 0x1ED9B00 Offset: 0x1ED5B00 VA: 0x1ED9B00
+	private void ]]][]][]][[][]][][[[[[[[]][]]]][][][[]][][[][]](ObscuredInt [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED9B14 Offset: 0x1ED5B14 VA: 0x1ED9B14 Slot: 70
+	public virtual bool get_IsMovable() { }
+	[PunRPC]
+	// RVA: 0x1EC91A8 Offset: 0x1EC51A8 VA: 0x1EC91A8
+	protected void SpawnAutoAbilityBot(short [[]]][[[[[[[]]]]]]]][[[[[[[][[][][[][[][[[][][[, Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[) { }
+	// RVA: 0x1ED8C60 Offset: 0x1ED4C60 VA: 0x1ED8C60
+	private void ][][[][[][[]]]]]]]][]][[[]]]]][[[[[][[[][[[[][[(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]]) { }
+	// RVA: 0x1EDA094 Offset: 0x1ED6094 VA: 0x1EDA094 Slot: 61
+	public override void OnOwnershipTransfered(object[] ]]][][]][][]][[]]]]][[[][[[]][[][[[[]]][][][[][) { }
+	// RVA: 0x1ED5C58 Offset: 0x1ED1C58 VA: 0x1ED5C58
+	protected bool ]][[][][[[]][][[][][[][]]][[[][][[[[][[[][[][[](Hashtable ][[][[[[[][[][[[][[]][]]]]][[][[[[][][][[[][][], string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	// RVA: 0x1EDA2A0 Offset: 0x1ED62A0 VA: 0x1EDA2A0
+	private void ]][]]][][][[][]][[]]]]][][[]][][[]][]]]]][][]]]([][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]], bool [][]]]]][][]][[][]][]][][][][][]][[]]]]][[]]]][ = False) { }
+	// RVA: 0x1EC8524 Offset: 0x1EC4524 VA: 0x1EC8524
+	private bool ][][[]][[[][][]]]]]][[]][]]]]]]]][[][][][][][]](Transform [[][[[]]][]][[]]][]]][[]][][]]]]]]][[]][][[][[], bool []][[]]]][][[]]]]][]]]][[[[][][[][]]][[[[][]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDA568 Offset: 0x1ED6568 VA: 0x1EDA568
+	public static void add_Respawned(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBEF20 Offset: 0x1EBAF20 VA: 0x1EBEF20
+	public byte GetActiveSetup() { }
+	// RVA: 0x1ED7E48 Offset: 0x1ED3E48 VA: 0x1ED7E48
+	public void SetKillsWithoutDie(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDA65C Offset: 0x1ED665C VA: 0x1EDA65C
+	public static void add_DashShot(Action<float> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDA750 Offset: 0x1ED6750 VA: 0x1EDA750
+	public void CmdSetupSupply(]]][[]][[]]][[]]][][]]][[[[[[]]]]]][][][[[][[[[ ][[[[[]]]]]]]]][[][]]]]]]][[]]][]][][[[]][[][][) { }
+	// RVA: 0x1ED4CDC Offset: 0x1ED0CDC VA: 0x1ED4CDC
+	private void ]][][][]][]][]]][[[]]][]][]]][][[[[[][[[][[[[][() { }
+	// RVA: 0x1ED194C Offset: 0x1ECD94C VA: 0x1ED194C
+	public void UseConsumable(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ][[]]]][[][][]][[][]][[][[]][[][][]][]][[[]][][) { }
+	// RVA: 0x1EDA884 Offset: 0x1ED6884 VA: 0x1EDA884
+	public void AddBattleRoyaleBooster(int [[]][[]]]]]][]]][[]][[][[]][[][[]][[][[][][[]][ = 1) { }
+	// RVA: 0x1EDAA30 Offset: 0x1ED6A30 VA: 0x1EDAA30
+	private void ][[[][][]][][[][]]]][[][[]][[[][[]][[]]][]][[]]() { }
+	// RVA: 0x1ED1CD0 Offset: 0x1ECDCD0 VA: 0x1ED1CD0
+	protected void [[]]]][][[[[[[]]][][][[][]]]]]][[[[[][][][]][[]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDAAA4 Offset: 0x1ED6AA4 VA: 0x1EDAAA4
+	public static void add_ShotAbilityReady(Action<Player, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDAB98 Offset: 0x1ED6B98 VA: 0x1EDAB98
+	public static void remove_UltimateChargingChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDAC8C Offset: 0x1ED6C8C VA: 0x1EDAC8C Slot: 71
+	public virtual bool IsArcShooting() { }
+	// RVA: 0x1ED767C Offset: 0x1ED367C VA: 0x1ED767C
+	public int GetFootballGoals() { }
+	// RVA: 0x1EB9F38 Offset: 0x1EB5F38 VA: 0x1EB9F38
+	public int GetTeamIndex() { }
+	// RVA: 0x1EC4B00 Offset: 0x1EC0B00 VA: 0x1EC4B00
+	private void []][]]][]]]]]]]][]][][[][][]]][][[][[][[][]][]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDADE4 Offset: 0x1ED6DE4 VA: 0x1EDADE4
+	public static void add_Teleported(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDAED8 Offset: 0x1ED6ED8 VA: 0x1EDAED8
+	private float [][]][[]][]]][[][]]]][[][]]]]]][[[][][][][[[[[[() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB044 Offset: 0x1ED7044 VA: 0x1EDB044
+	public static void remove_RespawnStarted(Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB138 Offset: 0x1ED7138 VA: 0x1EDB138
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] get_PassiveAbility() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB140 Offset: 0x1ED7140 VA: 0x1EDB140
+	public static void remove_ShotDone(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB234 Offset: 0x1ED7234 VA: 0x1EDB234
+	public Nullable<[][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]]> get_ActiveRespawn() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB23C Offset: 0x1ED723C VA: 0x1EDB23C
+	private void [[[][][]]]]][[[[[[][]][[]][][[[[]][[[[]]][[[][[() { }
+	// RVA: 0x1ED03B4 Offset: 0x1ECC3B4 VA: 0x1ED03B4
+	public void SetFootballAutoGoals(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][], int [[][]][]][]]][]]]][[[][]][]]]]]][][]][[[]]][[]]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDB27C Offset: 0x1ED727C VA: 0x1EDB27C
+	public static void add_ActivePlayersChanged(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDB358 Offset: 0x1ED7358 VA: 0x1EDB358
+	private void Awake() { }
+	[PunRPC]
+	// RVA: 0x1EDB750 Offset: 0x1ED7750 VA: 0x1EDB750
+	protected void ToggleIgnoreBullets(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	// RVA: 0x1EDB814 Offset: 0x1ED7814 VA: 0x1EDB814
+	private Transform [[[][[]]]]]][[[[[[[[[][]]][[[][]]]][[]]][[[]]][(out bool ]][]]][]][]][]][[[[][[]][[[]]][[]][]]][[]][]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDC4E4 Offset: 0x1ED84E4 VA: 0x1EDC4E4
+	private bool []]][][][[[]]][[[][[][]]][[][[][]][[[]]][][]]]](Player []][]][][][[][[]]][[[]]][][]][]]][]]][][][[[]][) { }
+	// RVA: 0x1ED4DA8 Offset: 0x1ED0DA8 VA: 0x1ED4DA8
+	private void ]][]]]][]][][]]][]]]]][[[][[][][[[][][]][[][]][() { }
+	// RVA: 0x1EDC510 Offset: 0x1ED8510 VA: 0x1EDC510
+	public void ShieldOff() { }
+	// RVA: 0x1ECAB18 Offset: 0x1EC6B18 VA: 0x1ECAB18
+	public void SetResourceCount(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBA26C Offset: 0x1EB626C VA: 0x1EBA26C
+	public void UseAbility(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]]) { }
+	// RVA: 0x1EDC64C Offset: 0x1ED864C VA: 0x1EDC64C
+	private void ]]][]]]]][][[]]][[]][[[[[[][]][[[][[]]][[[[[]]](float [[[][[[][[[]]][]][]][][[[][]]][]][[[]]]]][][[]], [][]][[[][][[[]][[[[[[][][][[[[[]][]]]]][]]][]] ]]]]][[][[[]][[[]][][[[[][][[[][[[]]]][[[[][]]]) { }
+	[PunRPC]
+	// RVA: 0x1EDC950 Offset: 0x1ED8950 VA: 0x1EDC950
+	protected void RPCSetSpeedMultiplier(byte ][[[]][]]][][[[][[]][][[[[][]]]]][][]]][[[][][]) { }
+	// RVA: 0x1EDC9EC Offset: 0x1ED89EC VA: 0x1EDC9EC
+	public void ParalysisEffect() { }
+	[PunRPC]
+	// RVA: 0x1EDCA0C Offset: 0x1ED8A0C VA: 0x1EDCA0C
+	protected void RpcUseExpandableExplosion() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDCC0C Offset: 0x1ED8C0C VA: 0x1EDCC0C
+	public static void remove_SupplyActivated(Action<Player, ]]][[]][[]]][[]]][][]]][[[[[[]]]]]][][][[[][[[[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDCD00 Offset: 0x1ED8D00 VA: 0x1EDCD00
+	public void SetBattleRoyaleBoosterCount(int [[]][[]]]]]][]]][[]][[][[]][[][[]][[][[][][[]][) { }
+	// RVA: 0x1EDCD88 Offset: 0x1ED8D88 VA: 0x1EDCD88
+	private void [[][]]]][]]]]][][[][][[]][]][]][]]]]]]]][][]]]]() { }
+	[PunRPC]
+	// RVA: 0x1EDCE3C Offset: 0x1ED8E3C VA: 0x1EDCE3C
+	protected void RpcProtectiveFieldExplode() { }
+	// RVA: 0x1EDAD2C Offset: 0x1ED6D2C VA: 0x1EDAD2C
+	public static int GetTeamIndex(int ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, bool []]]]]]][]][][[[]][[[[]]]][[]]][[]]][[[[[[]][[[) { }
+	// RVA: 0x1ED0ABC Offset: 0x1ECCABC VA: 0x1ED0ABC
+	private Vector3 ][][[[[[]][]][[]]][]][[[[][[][[[]]][][[[[]]]]]](float [][]][][[[][[][[][[][][[]]]]][][]]][][[[]][[][] = -1) { }
+	// RVA: 0x1ED5F8C Offset: 0x1ED1F8C VA: 0x1ED5F8C
+	public float GetRespawnTimeRemaining(int ][[][[]]]]][][[]]][[[[]]]]][]][[[[][][[[]][]][[ = -1) { }
+	[PunRPC]
+	// RVA: 0x1EDD6C0 Offset: 0x1ED96C0 VA: 0x1EDD6C0
+	protected void SpawnBotRPC(short [[][[[][[][[[[[[]]]][]]][]]]][[]]][][]]][]]][[[, short ]]][]][][]]]]]][[][][][[[[[[]][[][]][]]][[[[[[], Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[, byte ]]][[[[][][[]][[[[[[][[][][][[][[[]]][]]][[]][]) { }
+	// RVA: 0x1ECFB84 Offset: 0x1ECBB84 VA: 0x1ECFB84
+	private void [][[][[[[[[[[[[[]]][[][[]]][[[]]]][][[[[[][[[][() { }
+	// RVA: 0x1ED90BC Offset: 0x1ED50BC VA: 0x1ED90BC
+	private void ][[[[[[]]]]]]]][[[[]]]]]]]][[][][[[[[[]][][[[]]() { }
+	// RVA: 0x1EC0E30 Offset: 0x1EBCE30 VA: 0x1EC0E30
+	private bool ]]][][]]][[[]][[]][]][][]]]][[][[]]][]][][]][[[() { }
+	// RVA: 0x1EDD8A8 Offset: 0x1ED98A8 VA: 0x1EDD8A8 Slot: 72
+	protected virtual void OnDisable() { }
+	// RVA: 0x1EDDD68 Offset: 0x1ED9D68 VA: 0x1EDDD68
+	public string get_UserIdStr() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDD70 Offset: 0x1ED9D70 VA: 0x1EDDD70
+	public AimMode get_AimMode() { }
+	// RVA: -1 Offset: -1
+	protected static void ][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<T>(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[], T [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x230A744 Offset: 0x2306744 VA: 0x230A744
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<bool>
+	|
+	|-RVA: 0x230A84C Offset: 0x230684C VA: 0x230A84C
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<byte>
+	|
+	|-RVA: 0x230A950 Offset: 0x2306950 VA: 0x230A950
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<short>
+	|
+	|-RVA: 0x230AA54 Offset: 0x2306A54 VA: 0x230AA54
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<int>
+	|
+	|-RVA: 0x230AD20 Offset: 0x2306D20 VA: 0x230AD20
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1ED5200 Offset: 0x1ED1200 VA: 0x1ED5200
+	private static void [[]][][]][[]][]]]]][[[]]]][]][[]]]]][]]][]][]][(int []]][[[][][[][]][[]][]]][[][[]]][][[[[[][[][[[]) { }
+	// RVA: 0x1EC7964 Offset: 0x1EC3964 VA: 0x1EC7964
+	private Vector2 ]]]]][]]][[[[]][[][[][][[[[][[][[][]][]]][]]]]](Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	// RVA: 0x1ED9438 Offset: 0x1ED5438 VA: 0x1ED9438
+	public void SetAssists(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDDD78 Offset: 0x1ED9D78 VA: 0x1EDDD78
+	public int IncreaseTotalResourceCount(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][] = 1) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDDB0 Offset: 0x1ED9DB0 VA: 0x1EDDDB0
+	private void ][[][][]][]][]][]]][]][]]][[[[[][[[[]]]]][]]][](SkinType [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBB110 Offset: 0x1EB7110 VA: 0x1EBB110
+	private void ]]][][]]][[[[]][[[][][][[][[[[][][]]][[[]]]]]]](ObscuredInt [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDDDB8 Offset: 0x1ED9DB8 VA: 0x1EDDDB8
+	public void ResetAcidSpeedMultiplier() { }
+	// RVA: 0x1EB9E34 Offset: 0x1EB5E34 VA: 0x1EB9E34
+	private bool ][[]]]]]][][]][[[[[[][[[][[]]][]]]][[[][][][][](Player [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][]) { }
+	// RVA: 0x1ED1F5C Offset: 0x1ECDF5C VA: 0x1ED1F5C
+	private void ][[[]]][]][][]][][[[][][[[[]][][][][]][]][][][]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDE94 Offset: 0x1ED9E94 VA: 0x1EDDE94
+	public static void remove_InitialHealthUpdated(Action<Player, ValueUpdater<int>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDF88 Offset: 0x1ED9F88 VA: 0x1EDDF88
+	private void []][[]][[[]]]][][]]]]]][[][]]][[[[]]][[[][][][[(float [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED08D4 Offset: 0x1ECC8D4 VA: 0x1ED08D4
+	public bool get_IsTapToMove() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDF90 Offset: 0x1ED9F90 VA: 0x1EDDF90
+	public bool get_IsGhostStateActive() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDF98 Offset: 0x1ED9F98 VA: 0x1EDDF98
+	private void [[[[[][[[[[][][[]]][[[[][][[][][[]][][[[[[][[[](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDFA0 Offset: 0x1ED9FA0 VA: 0x1EDDFA0
+	private void []][][][[]][[[]]][[[[[[]]]][[]]][][[[]][][][][[(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDDFA8 Offset: 0x1ED9FA8 VA: 0x1EDDFA8
+	private void ][][[]]][]][][][[[[][[[][[][]]]][][][[][[]]][][(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDDFB0 Offset: 0x1ED9FB0 VA: 0x1EDDFB0
+	private void ][][]][]][]][][[[[[[[[][[][][[[[][[]][[]][][[[]() { }
+	// RVA: 0x1EBDA4C Offset: 0x1EB9A4C VA: 0x1EBDA4C
+	private void []]][[]]][[[]]][[]]][][][][[]]]][[][][][][][[][() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE0CC Offset: 0x1EDA0CC VA: 0x1EDE0CC
+	public static void add_BattleRoyaleBoosterTaken(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC2B00 Offset: 0x1EBEB00 VA: 0x1EC2B00
+	private void [[][[[[[[][]][[[[[]]]]]]][]][]][[]][[[[[]]]][[[() { }
+	// RVA: 0x1ECF45C Offset: 0x1ECB45C VA: 0x1ECF45C
+	public void CmdRespawn(Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[, bool [][]]]]][][]][[][]][]][][][][][]][[]]]]][[]]]][ = False, bool []][[][[][[][[][][[]][[][[[][[][]]][][][[]]][][ = False) { }
+	// RVA: 0x1ECA0C0 Offset: 0x1EC60C0 VA: 0x1ECA0C0
+	private void ][][[][]]]][[[]]][[]][[[[[]][[[[][][[[[][[][][]() { }
+	// RVA: 0x1EBDC58 Offset: 0x1EB9C58 VA: 0x1EBDC58
+	private void [][[][[[]]][]][]][]][[]][]][][[[][[]][[]]][[[[[(GameObject ]][[][][[][[]][]]]][][][[[]][][][[[]][]]]][[[]], float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]]) { }
+	// RVA: 0x1EBF90C Offset: 0x1EBB90C VA: 0x1EBF90C
+	public static int GetOtherTeamIndex(int []]][[[][][[][]][[]][]]][[][[]]][][[[[[][[][[[]) { }
+	// RVA: 0x1ECCDF8 Offset: 0x1EC8DF8 VA: 0x1ECCDF8
+	protected bool [][[[[]][[][][][][][[]]]][][][[][[][]][]][][]]]() { }
+	// RVA: 0x1ECEA60 Offset: 0x1ECAA60 VA: 0x1ECEA60
+	private void ][]][[]][[]]]][]][[]][]]]][[[[[[]]][[[[]]]]]][[() { }
+	// RVA: 0x1ED5CC8 Offset: 0x1ED1CC8 VA: 0x1ED5CC8
+	public void UpdateInitialHealth() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE1C0 Offset: 0x1EDA1C0 VA: 0x1EDE1C0
+	public []][][[[][[[][][]]]][[[]][[[[[]][][]][[[]]][[][ get_ChassisLevelConfigOriginal() { }
+	// RVA: 0x1EDE1C8 Offset: 0x1EDA1C8 VA: 0x1EDE1C8
+	public float GetSupplyDamage() { }
+	// RVA: 0x1EDE298 Offset: 0x1EDA298 VA: 0x1EDE298
+	public bool get_CanTakeResource() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE30C Offset: 0x1EDA30C VA: 0x1EDE30C
+	private void []]][][]][]]]]][[]]]]][][]]][[][][][]][[[[][][[(][][][]]][[]]]][]]]][[[[]]]][]]][[][]][]]][[][] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDE314 Offset: 0x1EDA314 VA: 0x1EDE314
+	public void SetSpeedMultiplier(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], bool [][]][[[[][[]][[[]]][[][[]][[][[[[[[[[][[[]]][[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE498 Offset: 0x1EDA498 VA: 0x1EDE498
+	private bool ][]][[][]][[[[[[]][]][][[]]]]]][]]][[[[[][][[][(Player [[[][[[[][[][]]]][][[][[[[[[]][][[][[[[][]]][][) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE508 Offset: 0x1EDA508 VA: 0x1EDE508
+	private void [][[[]]][]][[[]][[][]]][]][][]][[]]]]]]]]]][[][(ObscuredInt [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE520 Offset: 0x1EDA520 VA: 0x1EDE520
+	public int get_ClanIcon() { }
+	// RVA: 0x1ED08EC Offset: 0x1ECC8EC VA: 0x1ED08EC
+	private void [][]][[[][[][[[[][][]]][[][[]]][][]][]][]][]]][() { }
+	// RVA: 0x1ED2FAC Offset: 0x1ECEFAC VA: 0x1ED2FAC
+	public void SetKillsInARow(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE528 Offset: 0x1EDA528 VA: 0x1EDE528
+	private void ][[[[[]]]][[[[[[[[[][][[[]]][]][[[[]]]][]][[[[](bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED93F8 Offset: 0x1ED53F8 VA: 0x1ED93F8
+	public void ResetRelatedGunsDamageMultiplier() { }
+	[IteratorStateMachine(typeof(Player.[][]][]]]]][][]]]]][[[][][[][[][]]]][[[]][[[]]]))]
+	// RVA: 0x1EDE534 Offset: 0x1EDA534 VA: 0x1EDE534
+	private IEnumerator [[[][[]]][][]]][][[][[]]][]][[[[[[[[]][][[[[[]](float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[, float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]], bool [][[][]]][[][]]]]][][[]][]]][[[]][[[[[][[[[[][[) { }
+	// RVA: -1 Offset: -1
+	protected T [[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<T>(string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x2308DF8 Offset: 0x2304DF8 VA: 0x2308DF8
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<byte>
+	|
+	|-RVA: 0x2308E68 Offset: 0x2304E68 VA: 0x2308E68
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<short>
+	|
+	|-RVA: 0x2308ED8 Offset: 0x2304ED8 VA: 0x2308ED8
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<int>
+	|
+	|-RVA: 0x2308F48 Offset: 0x2304F48 VA: 0x2308F48
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1EDA20C Offset: 0x1ED620C VA: 0x1EDA20C
+	public static bool ContainsProperty(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, Hashtable ][[][[[[[][[][[[][[]][]]]]][[][[[[][][][[[][][], string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE5C8 Offset: 0x1EDA5C8 VA: 0x1EDE5C8
+	public ][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] get_CommanderLevelConfigOriginal() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE5D0 Offset: 0x1EDA5D0 VA: 0x1EDE5D0
+	private void [[[[[[][[][][[[[]][[[]]]][]][]]][[[[]][][[]][[[(SkinType [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDE5D8 Offset: 0x1EDA5D8 VA: 0x1EDE5D8
+	public UITankHud get_Hud() { }
+	// RVA: 0x1ECF080 Offset: 0x1ECB080 VA: 0x1ECF080
+	private void ]]][][[[[[[][][[]]][[[][]]][]][[[[[][][]][][][](bool ][[[[]]][][[][[][]][]]][[[][[[]][[[[][[[[][][]] = False) { }
+	// RVA: 0x1EDE5E0 Offset: 0x1EDA5E0 VA: 0x1EDE5E0
+	private void ][][[]]][]]][]]]]][][[]][[[]]][]][[[[[[[][][[]]() { }
+	// RVA: 0x1EDE6D8 Offset: 0x1EDA6D8 VA: 0x1EDE6D8
+	private bool ]][[[[[[]]][][[][][[[[]][][[][[][[]]]][[][]][[[(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]]) { }
+	[IteratorStateMachine(typeof(Player.][]][[][][[][[[[[[]][[]][[[[[]]]]]]]]]]]]][[[][))]
+	// RVA: 0x1ED801C Offset: 0x1ED401C VA: 0x1ED801C
+	private IEnumerator [][[[][]]][][]]][[[[[[[[][[[][][[]]][[[][[]]]][() { }
+	// RVA: 0x1EBB43C Offset: 0x1EB743C VA: 0x1EBB43C
+	public void SetHealth(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDE7F8 Offset: 0x1EDA7F8 VA: 0x1EDE7F8
+	public static void remove_Respawned(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDE8EC Offset: 0x1EDA8EC VA: 0x1EDE8EC
+	public void TakeDamagePercent(float ][[]]]][][]]][[]]]][[][[][][[[[[[][][[[[[][[[]], ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[ ]][][]]]][[[][[][]][][[][[][]]][][][]]]]][][]][) { }
+	// RVA: 0x1EBB0D8 Offset: 0x1EB70D8 VA: 0x1EBB0D8
+	public bool get_IsOwnedByOtherPlayer() { }
+	// RVA: 0x1ED7AD8 Offset: 0x1ED3AD8 VA: 0x1ED7AD8
+	public bool get_IsShootEnabled() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEACC Offset: 0x1EDAACC VA: 0x1EDEACC
+	public static void add_DifficultyDamageUpdated(Action<Player, Bullet, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEBC0 Offset: 0x1EDABC0 VA: 0x1EDEBC0
+	private static void ][][]]][]][[[][][]]]]][]][[[[[[][][[][][][][][[(Player [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1EDEC1C Offset: 0x1EDAC1C VA: 0x1EDEC1C Slot: 73
+	protected virtual void RpcShowHealEffect() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEC90 Offset: 0x1EDAC90 VA: 0x1EDEC90
+	public static void add_LocalPlayerHealthChanged(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDED6C Offset: 0x1EDAD6C VA: 0x1EDED6C
+	private void [[[]][[[][[[]][]][][[[[[]]]]]]][]][][[[[]][[]]]() { }
+	// RVA: 0x1ED9E90 Offset: 0x1ED5E90 VA: 0x1ED9E90
+	private void ][][[[][[]]]]]][[[[[][][[[[]][][[]]][[[]]][[[][(Player ]][]][[][[][]]]][][[]][]][[[[[]][[[[[[[[[][[][[, Vector3 ][[]][]][][]]][[[[]]]]]][]][[[]][]][][[[[][[[]], [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[[]][[]][[]]][][][]][][][][]]]]]][[[[]]][[][]], int [[]]][[][[][[][][][[]]]][[[][[[]][]]][][][[[]][, [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[][[][[]][][[][[]]]][][][[[[[][[]][[]][]][]][[, int ][[][][]][]]]]]]]]][[[]][[]]][]][[[][][][[[[][]) { }
+	// RVA: 0x1EDEE0C Offset: 0x1EDAE0C VA: 0x1EDEE0C Slot: 74
+	protected virtual void OnDestroy() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEEA4 Offset: 0x1EDAEA4 VA: 0x1EDEEA4
+	private void ][[[][][][]][]]]][[]][]][[][[[][[[[[[]][[[[[]][(float [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEEAC Offset: 0x1EDAEAC VA: 0x1EDEEAC
+	public static void remove_PveWaveUpdated(Action<Player, ValueUpdater<byte>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDEFA0 Offset: 0x1EDAFA0 VA: 0x1EDEFA0
+	public static void add_DamageTaken(Action<Player, Bullet, int, int> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC0D1C Offset: 0x1EBCD1C VA: 0x1EC0D1C
+	public bool get_IsVisible() { }
+	// RVA: 0x1ED12B4 Offset: 0x1ECD2B4 VA: 0x1ED12B4
+	public void Shoot(Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][], Vector3 ]]]]][]][[][[][[[]]][][[]]][[[]][[][[]][][]][[]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDF094 Offset: 0x1EDB094 VA: 0x1EDF094
+	public static void remove_DifficultyDamageUpdated(Action<Player, Bullet, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBB424 Offset: 0x1EB7424 VA: 0x1EBB424
+	public void CmdExplode(Player [][]][]][][]][[]][[]][[][]]][]][]][][][][[]]][], ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]] = 0, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[ ]][][]]]][[[][[][]][][[][[][]]][][][]]]]][][]][ = 0) { }
+	// RVA: 0x1EDF188 Offset: 0x1EDB188 VA: 0x1EDF188
+	public void ElectricFieldOff() { }
+	// RVA: 0x1EBBE24 Offset: 0x1EB7E24 VA: 0x1EBBE24
+	public bool get_IsDashActive() { }
+	[IteratorStateMachine(typeof(Player.][][[]][]]]]][[]]]][[]][][][]][[[[][][[[[][[]][))]
+	// RVA: 0x1ED8104 Offset: 0x1ED4104 VA: 0x1ED8104
+	private IEnumerator [[[[]]]][[][[]][[[]]][[][][[[[][[]]][[]][[[][]](][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], short[] []][[][][][][[]][[[]]][[]]]]]]][]]]]][[]]][]]][, short [[]]]][][]][][[][[]]][][][][[][]]]]]]]][[]]][[[, short[] []][]]][]]][[[[]][]][[[]]][]][][]][[[[[]][][[[]) { }
+	// RVA: 0x1EC80B0 Offset: 0x1EC40B0 VA: 0x1EC80B0
+	private void ][][[[][[]]]]][[[]][]]]]]]][][[]]]]][]]]]][[[[[(bool [[][][][[][][[][[[][[[][]][[][]]][[]]]]]]]][[][, float [[[[]][[[][[]]]]]]]][]]]]]]]][[[[]]]][[]]][][][ = 4) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDF288 Offset: 0x1EDB288 VA: 0x1EDF288
+	public float get_RelatedGunsDamageMultiplier() { }
+	// RVA: 0x1EDF290 Offset: 0x1EDB290 VA: 0x1EDF290 Slot: 75
+	public virtual bool CanIgnoreDamage(Player [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][]) { }
+	// RVA: 0x1EC31E8 Offset: 0x1EBF1E8 VA: 0x1EC31E8
+	private void ][[]][[][][[[[][]][][[]][]]][[[]][[[]]]]]]]][]]() { }
+	// RVA: 0x1EDF318 Offset: 0x1EDB318 VA: 0x1EDF318
+	public Vector3 get_LastHitDirection() { }
+	// RVA: 0x1ED91D8 Offset: 0x1ED51D8 VA: 0x1ED91D8
+	public bool get_HasPilot() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDF328 Offset: 0x1EDB328 VA: 0x1EDF328
+	public static void add_AfterGoalStarted(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDF404 Offset: 0x1EDB404 VA: 0x1EDF404
+	public void ActivateByTutorial() { }
+	[PunRPC]
+	// RVA: 0x1EC9A38 Offset: 0x1EC5A38 VA: 0x1EC9A38
+	protected void ToggleNitro(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[, byte [[[][[]]]]][][[[[[[]]]]][]][]][][][[][[[][]][][ = 0, Nullable<Vector2> ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDF6B4 Offset: 0x1EDB6B4 VA: 0x1EDF6B4
+	public static void add_ShotAbilityChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[IteratorStateMachine(typeof(Player.[[[]][][]]]]][][[[[][][[[[[]][[][[[]][]][[]][][))]
+	// RVA: 0x1EDE064 Offset: 0x1EDA064 VA: 0x1EDE064
+	private IEnumerator ][]][][[[][][]]][[]][][[[]][[][[[][][[]]]][][[[() { }
+	[PunRPC]
+	// RVA: 0x1EDF7A8 Offset: 0x1EDB7A8 VA: 0x1EDF7A8
+	protected void StaticChargeRPC(int ][[]][][[]]][]]][[][]]]][[[[[][[[]][]]]]][[[]][) { }
+	// RVA: 0x1ED36C0 Offset: 0x1ECF6C0 VA: 0x1ED36C0
+	public bool get_IsHaveBall() { }
+	// RVA: 0x1EDA91C Offset: 0x1ED691C VA: 0x1EDA91C
+	public int GetBattleRoyaleBoosterCount() { }
+	[CompilerGenerated]
+	// RVA: 0x1EDFBB4 Offset: 0x1EDBBB4 VA: 0x1EDFBB4
+	public static void add_RoomPropertiesReset(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EDFCA8 Offset: 0x1EDBCA8 VA: 0x1EDFCA8
+	public void set_IsFirstBlood(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDFCB4 Offset: 0x1EDBCB4 VA: 0x1EDFCB4
+	public bool get_IsMissing() { }
+	// RVA: 0x1EDFCBC Offset: 0x1EDBCBC VA: 0x1EDFCBC
+	protected void FixedUpdate() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0198 Offset: 0x1EDC198 VA: 0x1EE0198
+	private void ][[][[][[[]]][[]][][][][[]][]][][[[][[][[][][[[(][[][[[[[[][][]]][]]]]][][][[[]][[][]][[[[[[]]] [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: -1 Offset: -1
+	protected static void ][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<T>(PhotonPlayer [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][], string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[], T [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x230AB58 Offset: 0x2306B58 VA: 0x230AB58
+	|-Player.][][[]][[][[]][]]][[]][]]][[[]][]]]]][][][[[[[[<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1EDFFDC Offset: 0x1EDBFDC VA: 0x1EDFFDC
+	private float ]][[][][]]]]]]][]][][[][[[[[]]][]][[[[][[[[][[[() { }
+	[PunRPC]
+	// RVA: 0x1EC6D48 Offset: 0x1EC2D48 VA: 0x1EC6D48
+	private void StopNitro() { }
+	[IteratorStateMachine(typeof(Player.[]]][][]]]]][[][[]]][]][[][[[]][]]][]]][[][][]]))]
+	// RVA: 0x1EC54D0 Offset: 0x1EC14D0 VA: 0x1EC54D0
+	private IEnumerator ]]]][][[[]]]][[]][]]]][]]]]]]]][[]][][[[[[[[][](int []][[][[[][]][]][[[[[[][[]][[[[]]]][[[[[[[[[]][, ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[ ]][][]]]][[[][[][]][][[][[][]]][][][]]]]][][]][, float ]][[[][][][][[[[][]]][][][[[[]]][[[[[[]]][][[]]) { }
+	// RVA: 0x1ED9024 Offset: 0x1ED5024 VA: 0x1ED9024
+	private void ]]][][]][[[]][[]][]]]]]][[]][[[][]][[[[][]][][]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE01A0 Offset: 0x1EDC1A0 VA: 0x1EE01A0
+	private void ]][]]]]][[][[[]][[][[[][[[[]][]]][][[[]]]]]][]](int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC5150 Offset: 0x1EC1150 VA: 0x1EC5150
+	public bool get_IsRespawning() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE01A8 Offset: 0x1EDC1A8 VA: 0x1EE01A8
+	public string get_ClanName() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE01B0 Offset: 0x1EDC1B0 VA: 0x1EE01B0
+	public void set_NextBushHideTime(float [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE01B8 Offset: 0x1EDC1B8 VA: 0x1EE01B8
+	private void ][[]][][[][]][][][[][[[[[][]][]][[][[[[[][]]]][(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED0004 Offset: 0x1ECC004 VA: 0x1ED0004
+	private void ][[[[]][[]][]][][[[][]][]]]]]][][[[]]][]]]][[][() { }
+	// RVA: 0x1ECBB2C Offset: 0x1EC7B2C VA: 0x1ECBB2C
+	private static void ][[]][[][][]][[][[][[[]][[][][]]]]]]]][]][][]][() { }
+	// RVA: 0x1EE01C4 Offset: 0x1EDC1C4 VA: 0x1EE01C4
+	public int IncreaseDeaths() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE027C Offset: 0x1EDC27C VA: 0x1EE027C
+	public static void add_SetupChanged(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EE0370 Offset: 0x1EDC370 VA: 0x1EE0370
+	private void []]]]]]]][][[][]]][][]]]][][]][[][]][]][[[[][[]() { }
+	// RVA: 0x1ECCF38 Offset: 0x1EC8F38 VA: 0x1ECCF38
+	private void ][[[][[][[[][[][][]][][[[[[[][][]][[[]][[]][[[[() { }
+	// RVA: 0x1EE0408 Offset: 0x1EDC408 VA: 0x1EE0408
+	public void SetInvaderSetup(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EE01F4 Offset: 0x1EDC1F4 VA: 0x1EE01F4
+	public void SetDeaths(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EDF2D0 Offset: 0x1EDB2D0 VA: 0x1EDF2D0
+	public bool get_IsRespawnShieldActive() { }
+	[PunRPC]
+	// RVA: 0x1EE0490 Offset: 0x1EDC490 VA: 0x1EE0490
+	private void PlayFenrirShieldEffect() { }
+	// RVA: 0x1ED8C3C Offset: 0x1ED4C3C VA: 0x1ED8C3C
+	public void CancelShotAbility() { }
+	// RVA: 0x1ED8E00 Offset: 0x1ED4E00 VA: 0x1ED8E00
+	private void [][[][[]][][][[][][[]]][][][[]]][[[[[[]]][][]][() { }
+	// RVA: 0x1ED0054 Offset: 0x1ECC054 VA: 0x1ED0054
+	private void ]][[[[[[[]][[][[][][[]][[][[[]]][][][[]]]][][[](bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED09D0 Offset: 0x1ECC9D0 VA: 0x1ED09D0
+	private void [[[][[[[[]][][[[][[[][[[]]][]]]]][[][[[[[[[][]](Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE05C8 Offset: 0x1EDC5C8 VA: 0x1EE05C8
+	public static void remove_ReloadDurationUpdated(Action<Player, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC74F0 Offset: 0x1EC34F0 VA: 0x1EC74F0
+	private void ]][[][[[[[][][[[]]]]]]]]][][][]][[][][[]][][][](bool ]]]][][[]]]][[[]][][]]]]]][]]]][[[[]][][[]][[][) { }
+	// RVA: 0x1ED4E78 Offset: 0x1ED0E78 VA: 0x1ED4E78
+	private void ]][[[]]][]]]][[][[]][]]]][][[[]][[[]][]][[[][][(int []]][[[][][[][]][[]][]]][[][[]]][][[[[[][[][[[]) { }
+	// RVA: 0x1EE06BC Offset: 0x1EDC6BC VA: 0x1EE06BC
+	private void [][]][[[[]]][[]][][[]][][]][][[][[[[]]][[]][]]](Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	// RVA: 0x1ECD4C4 Offset: 0x1EC94C4 VA: 0x1ECD4C4
+	private void [[][[]][[[]]][][[[[[]]]]]]]][[]]][][][][][]]]]](bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[, int ]]]]]]][[[][]]][][[][][][[[]][[]][[[[[]][[[][]]) { }
+	// RVA: 0x1EE09F4 Offset: 0x1EDC9F4 VA: 0x1EE09F4
+	public void set_LastHitDirection(Vector3 [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC45EC Offset: 0x1EC05EC VA: 0x1EC45EC
+	public void RefreshTankVisibility() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0A04 Offset: 0x1EDCA04 VA: 0x1EE0A04
+	private void ][[][[[][[[][[[[]]]][[[[[]][]]][[]][[][][][[]]](][][]][]]]]][[]][[[]][][[]][[][[][][[][]][]]][[ [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0A0C Offset: 0x1EDCA0C VA: 0x1EE0A0C
+	public static void remove_Exploded(Action<Player, Player, ][[[][]][][[[[]]]][[]][[[]][[]]]][]]]]]]][]]][[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED6600 Offset: 0x1ED2600 VA: 0x1ED6600
+	private void [][][[]][]][]][][[][]]]]]][[[]]][]]][][[[[]][]]() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0B00 Offset: 0x1EDCB00 VA: 0x1EE0B00
+	public static void add_LocalShotStarting(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0BDC Offset: 0x1EDCBDC VA: 0x1EE0BDC
+	public static void remove_AbilitiesUpdated(Action<Player, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>, ValueUpdater<][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]]>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0CD0 Offset: 0x1EDCCD0 VA: 0x1EE0CD0
+	public [[][[][]]][[][[][[[[[][[][][]]]][[]]][[[[]][[][ get_TurretConfig() { }
+	// RVA: 0x1EBD35C Offset: 0x1EB935C VA: 0x1EBD35C
+	public int GetKills() { }
+	// RVA: 0x1EBDDE4 Offset: 0x1EB9DE4 VA: 0x1EBDDE4
+	private void ][[[]][[][[[[[][[[[[]][[][][[][][]][][][][][[[](float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[, float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]], bool [][[][]]][[][]]]]][][[]][]]][[[]][[[[[][[[[[][[ = True) { }
+	// RVA: 0x1EE0CD8 Offset: 0x1EDCCD8 VA: 0x1EE0CD8
+	private void ]]][]][[][[[]]]]][[]][[[][[]]]][[][]][[[][[[]]](bool ]]][]][[]]]]][][[]][[[[][[[][]]]][]]]][]][[[][]) { }
+	// RVA: 0x1EE0D1C Offset: 0x1EDCD1C VA: 0x1EE0D1C
+	public void set_IsMissing(bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: -1 Offset: -1
+	protected static T [[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<T>(PhotonPlayer [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][], string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x23098C0 Offset: 0x23058C0 VA: 0x23098C0
+	|-Player.[[[[]]][[[][[][][]][[[[[[[][[]]]]]]]]]]]][[[]]]<__Il2CppFullySharedGenericType>
+	*/
+	// RVA: 0x1ED492C Offset: 0x1ED092C VA: 0x1ED492C
+	private void [[]][][]]]][[]][]][[]][][[][]][][[][[][][[][[[[() { }
+	[PunRPC]
+	// RVA: 0x1EE0D28 Offset: 0x1EDCD28 VA: 0x1EE0D28
+	protected void ToggleSpeedMultiplier(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	// RVA: 0x1EDCF0C Offset: 0x1ED8F0C VA: 0x1EDCF0C
+	private Vector3 ][][]]]][]]]][[][[[]]][[[]]][][[][[[]]][][[[]]](Player ][][]]]]]][[][[[[][][]][][[[[]][[]]][][][[[]]]]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0E70 Offset: 0x1EDCE70 VA: 0x1EE0E70
+	public static void add_SpawnEffectUpdated(Action<Player, ValueUpdater<PooledBehaviour>, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE0F64 Offset: 0x1EDCF64 VA: 0x1EE0F64
+	public ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] get_ActiveAbility() { }
+	// RVA: 0x1EBB288 Offset: 0x1EB7288 VA: 0x1EBB288
+	public bool IsBot() { }
+	// RVA: 0x1EE0F6C Offset: 0x1EDCF6C VA: 0x1EE0F6C
+	public bool IsConsumableReady(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ][[]]]][[][][]][[][]][[][[]][[][][]][]][[[]][][, out float [][[[[][[]]]]][[[[[]][[][[]]]][][]][[[][[]]][][) { }
+	[PunRPC]
+	// RVA: 0x1EE0F88 Offset: 0x1EDCF88 VA: 0x1EE0F88 Slot: 76
+	protected virtual void RpcRespawn(Vector3 [][[]][]][[]]][[[[[]]][[][]][][[][[][]]][[]][[[) { }
+	// RVA: 0x1EB9F14 Offset: 0x1EB5F14 VA: 0x1EB9F14
+	public bool get_IsReductionShieldActive() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1834 Offset: 0x1EDD834 VA: 0x1EE1834
+	public static void add_SupplyActivated(Action<Player, ]]][[]][[]]][[]]][][]]][[[[[[]]]]]][][][[[][[[[> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECE9AC Offset: 0x1ECA9AC VA: 0x1ECE9AC
+	public static void SetIsBot(string ]][]][[]][][]]][[][[[][]]]][]][]][]]][]]]][]][[, bool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[PunRPC]
+	// RVA: 0x1EE1704 Offset: 0x1EDD704 VA: 0x1EE1704
+	protected void RpcToggleDamageMultiplier(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	// RVA: 0x1EC3864 Offset: 0x1EBF864 VA: 0x1EC3864
+	protected static string []][[]]]]][[][[]][[[[[]][][][[[[[[][[[[[][[]]][(string ][][]]][[][[][][[][[[[[]][[][[][]]]]][][[[[[]]], string []][[[]]]][][[[][[[][[[][[]]]]][[]][][]][][[[[]) { }
+	// RVA: 0x1EC5194 Offset: 0x1EC1194 VA: 0x1EC5194
+	public bool get_IsSupplyShieldActive() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1928 Offset: 0x1EDD928 VA: 0x1EE1928
+	public bool get_IsIgnoreBulletsActive() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1930 Offset: 0x1EDD930 VA: 0x1EE1930
+	public static void add_ReloadDurationUpdated(Action<Player, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EE1A24 Offset: 0x1EDDA24 VA: 0x1EE1A24
+	public void CmdAddAchievement(PhotonPlayer [[]]][[][[[[][]]]][[][[[[][[[][]]]][[][[]][]][], [[]]]]]][]][]][[]][]][][][][]][[[[][]][[[[[[][[ [[[[][][[]]][][[][][[]]]]]][]]][[[][][][[]]]]]]) { }
+	// RVA: 0x1EDCE84 Offset: 0x1ED8E84 VA: 0x1EDCE84
+	public bool get_ProtectiveFieldIsActive() { }
+	// RVA: 0x1EE1BB8 Offset: 0x1EDDBB8 VA: 0x1EE1BB8 Slot: 77
+	protected virtual void ][[[][[[][][[[][[][][][]]][][[[[[[[[[[]]]][[]][(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]]) { }
+	// RVA: 0x1EE1CF4 Offset: 0x1EDDCF4 VA: 0x1EE1CF4
+	public void RefreshSplitterUltimateState() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1D2C Offset: 0x1EDDD2C VA: 0x1EE1D2C
+	public bool get_IsActiveAbilityStarted() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1D34 Offset: 0x1EDDD34 VA: 0x1EE1D34
+	public bool get_IsRevenge() { }
+	[IteratorStateMachine(typeof(Player.][][[]]][]][]][[][[]]][][[[[][[[[[[]][[]]]]]][]))]
+	// RVA: 0x1EE03B0 Offset: 0x1EDC3B0 VA: 0x1EE03B0
+	private IEnumerator [[[[[][[]][][[][[][][]][][][[][]]][]]][][[][[[[() { }
+	[IteratorStateMachine(typeof(Player.[[[]]]]]]][[][[]]]][[][[][[[][[[[]]][[[[][]][[[))]
+	// RVA: 0x1ED808C Offset: 0x1ED408C VA: 0x1ED808C
+	private IEnumerator ]]]][][[[][][]]]]]][]][[[]]]]]][[][][[[]]][]]][(float []][]][][][][][][[]]][[[[[[[]]]][[[[[]][[]]]]][) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1D3C Offset: 0x1EDDD3C VA: 0x1EE1D3C
+	public static void add_InitialHealthUpdated(Action<Player, ValueUpdater<int>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1E30 Offset: 0x1EDDE30 VA: 0x1EE1E30
+	public ObscuredInt get_InitialHealth() { }
+	// RVA: 0x1EDC1B8 Offset: 0x1ED81B8 VA: 0x1EDC1B8
+	private Transform [][[][]]]]][[[[[[[[[[][[[][[[]]][[[]][][[][]][](List<Transform> [[][]][[][][[][[]]]][[]]][[[[[[[]][][]]]]]][[[[, bool ]]][[]]]]]]][][[][]][[[[][[[][]]][][]]]]]][][[]) { }
+	// RVA: 0x1EE1E48 Offset: 0x1EDDE48 VA: 0x1EE1E48
+	public bool TryTakeResource() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE1FD0 Offset: 0x1EDDFD0 VA: 0x1EE1FD0
+	public static void remove_ActivePlayersChanged(Action [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECF924 Offset: 0x1ECB924 VA: 0x1ECF924
+	private void ]]]][[]][][[][[[[[[[]][][]]][[[[][]]]][[]]][]]]() { }
+	// RVA: 0x1EE20AC Offset: 0x1EDE0AC VA: 0x1EE20AC
+	public byte GetPveWaveIndex() { }
+	// RVA: 0x1EE20D8 Offset: 0x1EDE0D8 VA: 0x1EE20D8
+	public void ApplyIncreaseReloadTime(float ]][]][][[]]][[]]][]][[]]][]]]]][[[][[[[[]][[][[, float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]]) { }
+	// RVA: 0x1EDB6A4 Offset: 0x1ED76A4 VA: 0x1EDB6A4
+	public void RefreshPaint() { }
+	// RVA: 0x1EE21B8 Offset: 0x1EDE1B8 VA: 0x1EE21B8 Slot: 78
+	public virtual void ToggleTankVisuals(bool ][]]][]]][[[[][][]]][[][]]]]][][]]]][]]][][]][]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE2D3C Offset: 0x1EDED3C VA: 0x1EE2D3C
+	public int get_Trophies() { }
+	[IteratorStateMachine(typeof(Player.[[[]][][[[[][[[][]][[][]][[[]][[[[]][[[[[][[[][))]
+	// RVA: 0x1EE0DF8 Offset: 0x1EDCDF8 VA: 0x1EE0DF8
+	private IEnumerator ]][[]]][]][][[][]][]][][[][][[][[][[[[]]][[]]][(float [][[]]]]][[[]]]][]]]]][]]][[]][[[[][][]][[]]]]]) { }
+	[PunRPC]
+	// RVA: 0x1EE16D0 Offset: 0x1EDD6D0 VA: 0x1EE16D0
+	protected void ToggleElectricFieldRPC(bool ][[][[[[][[]][[[[][][][[[[][][[][[[[][]][[]][[[) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE2D44 Offset: 0x1EDED44 VA: 0x1EE2D44
+	public static void remove_CanIgnoreBossProtectionToggled(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ED927C Offset: 0x1ED527C VA: 0x1ED927C
+	public void SetActiveSetup(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EE2E38 Offset: 0x1EDEE38 VA: 0x1EE2E38 Slot: 79
+	protected virtual void OnEnable() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE377C Offset: 0x1EDF77C VA: 0x1EE377C
+	private bool ][[]][][][[[[][][[]]]]]][]]][[][]]][][][[[[][][(Player [[[][[[[][[][]]]][][[][[[[[[]][][[][[[[][]]][][) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3780 Offset: 0x1EDF780 VA: 0x1EE3780
+	public int get_SetupCount() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3788 Offset: 0x1EDF788 VA: 0x1EE3788
+	private void ]]]][][[[[[]]]]][]]][[[[[[[[]][][][[[][[]]]]]][(string [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC0D38 Offset: 0x1EBCD38 VA: 0x1EC0D38
+	private void ]][[][[[]]][]][][[][]]][][]]]]][]]][][][][[]][[() { }
+	// RVA: 0x1EE3790 Offset: 0x1EDF790 VA: 0x1EE3790
+	private void []][[[][[[[[[[[]]]][][]][][[][]][]][[][][[[][]](Vector2 ]][][][[[[]]][][][]][[[[[]]][[][][[]]]]][[][][]) { }
+	// RVA: 0x1ED9B68 Offset: 0x1ED5B68 VA: 0x1ED9B68
+	private Player [[]][][]][[][[[[[][[[][]][[]]]][]]]][][][]][[][(Player ]][]][[][[][]]]][][[]][]][[[[[]][[[[[[[[[][[][[, int ]]][[[[][][[]][[[[[[][[][][][[][[[]]][]]][[]][], List<Player> [[][[[[]][][][][[[]]][[[[[[[]][[]][][]][[[[]][], ][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[[]][[]][[]]][][][]][][][][]]]]]][[[[]]][[][]], [[][]]]][[[[[][[]]][]]][]]][[][[][[[]][[]]][[[] [[][[][[]][][[][[]]]][][][[[[[][[]][[]][]][]][[) { }
+	// RVA: 0x1ED91F0 Offset: 0x1ED51F0 VA: 0x1ED91F0
+	private void []]][[]]][[][[]][][[[[]]]][[[[[]][[[][][]][[[][() { }
+	// RVA: 0x1ED2DCC Offset: 0x1ECEDCC VA: 0x1ED2DCC
+	private void [[[]][][[]][[[[[[[[[[][[[]]]][[][]]]][]]]]][][[() { }
+	[PunRPC]
+	// RVA: 0x1EE37A0 Offset: 0x1EDF7A0 VA: 0x1EE37A0
+	protected void CmdShootAbility(][[[[]][]]]][[[[][[]][[[][[[[[[]][][[[[[[]][]]] ]][][[[]]][[[[]]]][][[]][[[][[]]][][][[[][[[]]], short[] []][[][][][][[]][[[]]][[]]]]]]][]]]]][[]]][]]][, short ]]]]][[]]][[]]][]]]]]][][]]][][[]][][[]]][][]][, short[] []][]]][]]][[[[]][]][[[]]][]][][]][[[[[]][][[[]) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3A3C Offset: 0x1EDFA3C VA: 0x1EE3A3C
+	public static void remove_Spawned(Action<Player> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EE3B30 Offset: 0x1EDFB30 VA: 0x1EE3B30
+	private void [][]][[[[]]]][][[[]]][][][][[][]][][]]]]]][]]][(int ]]]][]]]]][[]]][]][[[]][[[]]]][[[[]]][][[[[[[][, int ]]]][[]]][[[[][]]]]][]][]]][][]]]]][[[][[][][[[) { }
+	// RVA: 0x1EC7C34 Offset: 0x1EC3C34 VA: 0x1EC7C34
+	private void ]][[]]][]]][][[][]][[[]][[[]]][[[][[[]][[[]]]][(int [[[][[][[][]][[[]][[][][[[][]][[]]][[]]][[]][][, int []][[]][[[[]]][][][[[[][][][[]][[]]]]]]][]]][[[ = -1) { }
+	// RVA: 0x1EE3B3C Offset: 0x1EDFB3C VA: 0x1EE3B3C Slot: 80
+	protected virtual void Start() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3CAC Offset: 0x1EDFCAC VA: 0x1EE3CAC
+	private void ]]][[[]]][[][[]][[[][[][][][[][][[[]][]]]]]]][[(ObscuredBool [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1ECE8A8 Offset: 0x1ECA8A8 VA: 0x1ECE8A8
+	private void [[[]]][[[]]][[[][]][][[][[[]]]][[]][[[][[][][][(int [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EBF5D0 Offset: 0x1EBB5D0 VA: 0x1EBF5D0
+	public bool CanSeePlayer(Player ]]][[[[][]][]][]]]]]]][]]]]]]][]]]][[]][[][[[]], bool ]]]][[]]][[[]]]][]][[][]][]]]]]][]][[[[[[[[]][] = True) { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3CBC Offset: 0x1EDFCBC VA: 0x1EE3CBC
+	public static void remove_SpawnEffectUpdated(Action<Player, ValueUpdater<PooledBehaviour>, ValueUpdater<float>> [[][[][[]][][][[][[]]]]][[]]][]]]]]]]][]][[[][]) { }
+	// RVA: 0x1EC25B4 Offset: 0x1EBE5B4 VA: 0x1EC25B4
+	private void ]][[][][[]]][]]][[][]]][[]][]][]]]]][]]][]]]][[() { }
+	// RVA: 0x1EDDE1C Offset: 0x1ED9E1C VA: 0x1EDDE1C
+	public void UpdateAimMode() { }
+	[CompilerGenerated]
+	// RVA: 0x1EE3DB0 Offset: 0x1EDFDB0 VA: 0x1EE3DB0
+	public int get_KilledBy() { }
+	[PunRPC]
+	// RVA: 0x1EE3DB8 Offset: 0x1EDFDB8 VA: 0x1EE3DB8
+	protected void SpawnProtectiveField(Vector3 []]][[]]]]][][[][[]][]][[[]][[[][[[[[[[][[[]][]) { }
+	// RVA: 0x1EC30A0 Offset: 0x1EBF0A0 VA: 0x1EC30A0
+	private void [[[]][]]][[[[][]]][[][[[[][]]][]]]][]][][[]][][(bool ][[[[][[[]][[[[]]][[[[][[[][][[]][[][][[]]]]][]) { }
+}
