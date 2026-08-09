@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Hash Generator & Sender</title>
+    <!-- Nhúng CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px 30px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            color: #1a1a2e;
+            border-bottom: 2px solid #eaeef3;
+            padding-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 20px;
+            background: #f8f9fc;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-item .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .info-item .value {
+            font-weight: 500;
+            color: #1a1a2e;
+            word-break: break-all;
+            font-size: 14px;
+        }
+
+        .info-item .value.mono {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: #eef1f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 20px 0 8px 0;
+            font-size: 16px;
+        }
+
+        .raw-box,
+        .hash-box {
+            background: #f8f9fc;
+            border-radius: 6px;
+            padding: 12px 16px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 12px;
+        }
+
+        .hash-box {
+            border-left-color: #d63384;
+            color: #d63384;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .response-box {
+            margin-top: 20px;
+            background: #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+        }
+
+        .status-ok {
+            color: #28a745;
+        }
+
+        .status-err {
+            color: #dc3545;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .flex-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #28a745;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dee2e6;
+            margin: 18px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>🚀 Auto Battle Reward</h2>
+
+        <!-- Thông tin cố định + random -->
+        <div class="info-grid">
+            <div class="info-item"><span class="label">User ID</span><span class="value mono">10617441</span></div>
+            <div class="info-item"><span class="label">Rnd</span><span class="value mono" id="rndDisplay">-</span></div>
+            <div class="info-item"><span class="label">Key</span><span class="value mono"
+                    style="font-size:11px;">SCG&lt;([k*+62:($9.C}SXg85rwry^AwHU</span></div>
+            <div class="info-item"><span class="label">Stats</span><span class="value" id="statsPreview"
+                    style="font-size:12px;">-</span></div>
+        </div>
+
+        <!-- Raw string & Hash -->
+        <div class="section-title">📄 Raw String (đã nối)</div>
+        <div class="raw-box" id="rawDisplay">-</div>
+
+        <div class="section-title">🔐 MD5 Hash</div>
+        <div class="hash-box" id="hashDisplay">-</div>
+
+        <!-- Nút gửi -->
+        <button class="btn" id="sendBtn" onclick="sendRequest()">📤 Gửi Request</button>
+        <div id="loadingIndicator" class="hidden flex-row" style="margin-top:10px;">
+            <span class="spinner"></span> Đang gửi...
+        </div>
+
+        <!-- Response -->
+        <div class="section-title">📨 Server Response</div>
+        <div class="response-box" id="responseBox">Chưa gửi</div>
+
+        <hr>
+        <div style="font-size:12px; color:#6c757d; text-align:center;">
+            Tất cả thông số được hardcode/random tự động. Nhấn nút để gửi.
+        </div>
+    </div>
+
+    <script>
+        // ========== CẤU HÌNH CỐ ĐỊNH ==========
+        const USR_ID = "10617441";
+        const KEY = "SCG<([k*+62:($9.C}SXg85rwry^AwHU";
+        const SEPARATOR = "-";
+        const URL = "https://rh1.tal.highcore.io/TankHeroes/Release/User/AddBattleReward.php";
+
+        // Các tham số khác (giữ nguyên từ curl)
+        const FIXED_PARAMS = {
+            isAdReady: "1",
+            mostUsedParts: JSON.stringify({
+                "Turret": ["MosinTurret", "ShotgunTurret", "NapalmTurret"],
+                "Chassis": ["MotoShassis", "SixWheels", "FourWheels"],
+                "Commander": ["TheBlock", "BradMalone", "JasonSmackham"]
+            }),
+            voucherMatches: "23",
+            sessionMatches: "4",
+            paymentTier: "T4",
+            holidayDropVersion: "253|8_279_vi",
+            holidayEventVersion: "290|8_279_vi",
+            onboardingEventVersion: "250|8_270_vi",
+            resourceBrawlEventVersion: "244|8_265_vi",
+            bossEventVersion: "",
+            locale: "vi",
+            nV: "1285",
+            bV: "9.600",
+            lV: "2959",
+            oV: "8"
+        };
+
+        // ========== HÀM RANDOM ==========
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function randFloat(min, max, decimals = 6) {
+            const val = Math.random() * (max - min) + min;
+            return parseFloat(val.toFixed(decimals));
+        }
+
+        // ========== TẠO STATS NGẪU NHIÊN ==========
+        function generateStats() {
+            const achievements = {
+                Assist: randInt(20, 30),
+                Kill: randInt(20, 30),
+                DoubleKill: randInt(20, 30),
+                TripleKill: randInt(20, 30),
+                Win: 1,   // giữ nguyên
+                Resource: randInt(20, 30),
+                TotalResource: randInt(20, 30)
+            };
+
+            const drop = {
+                Drops: randInt(1, 3),
+                Type: "Coins",
+                Count: randInt(1, 5)
+            };
+
+            const stats = {
+                Type: "Bounty",
+                Scene: "GameBounty1",
+                Place: 2,
+                BetTickets: 1,
+                Achievements: achievements,
+                EnemyTrophies: [98861, 91464, 80165],
+                ScorePercent: randFloat(0.75, 0.95, 6),
+                Kills: achievements.Kill,
+                TeamScores: [28, 34],
+                Drop: [drop],
+                MatchDuration: randFloat(120, 180, 3)
+            };
+            return stats;
+        }
+
+        // ========== TÍNH HASH ==========
+        function computeHash(usrId, statsJson, rnd) {
+            // Mảng chứa 2 phần tử: usrId và statsJson
+            const array = [usrId, statsJson];
+            // Tạo raw string: array[0] + "-" + array[1] + "-" + rnd + "-" + key
+            const raw = array.join(SEPARATOR) + SEPARATOR + rnd + SEPARATOR + KEY;
+            const hash = CryptoJS.MD5(raw).toString();
+            return { raw, hash };
+        }
+
+        // ========== KHỞI TẠO VÀ HIỂN THỊ ==========
+        let currentRnd = null;
+        let currentStats = null;
+        let currentStatsJson = null;
+        let currentRaw = null;
+        let currentHash = null;
+
+        function prepareData() {
+            // Random rnd (10 chữ số)
+            currentRnd = randInt(1049513150, 1050513150);
+
+            // Tạo stats
+            currentStats = generateStats();
+            currentStatsJson = JSON.stringify(currentStats); // không có khoảng trắng
+
+            // Tính hash
+            const result = computeHash(USR_ID, currentStatsJson, currentRnd);
+            currentRaw = result.raw;
+            currentHash = result.hash;
+
+            // Cập nhật UI
+            document.getElementById('rndDisplay').textContent = currentRnd;
+            document.getElementById('statsPreview').textContent = currentStatsJson.length > 80 ? currentStatsJson.substring(0, 80) + '…' : currentStatsJson;
+            document.getElementById('statsPreview').title = currentStatsJson;
+            document.getElementById('rawDisplay').textContent = currentRaw;
+            document.getElementById('hashDisplay').textContent = currentHash;
+
+            // Reset response
+            document.getElementById('responseBox').textContent = 'Đã chuẩn bị, nhấn "Gửi Request" để gửi.';
+        }
+
+        // ========== GỬI REQUEST ==========
+        async function sendRequest() {
+            prepareData();
+            const btn = document.getElementById('sendBtn');
+            const loading = document.getElementById('loadingIndicator');
+            const responseBox = document.getElementById('responseBox');
+
+            // Vô hiệu nút trong lúc gửi
+            btn.disabled = true;
+            btn.textContent = '⏳ Đang gửi...';
+            loading.classList.remove('hidden');
+
+            try {
+                // Tạo body dạng URLSearchParams
+                const body = new URLSearchParams();
+                body.append('usrId', USR_ID);
+                body.append('stats', currentStatsJson);
+                body.append('rnd', currentRnd);
+                body.append('hash', currentHash);
+
+                // Thêm các tham số cố định
+                for (const [key, val] of Object.entries(FIXED_PARAMS)) {
+                    body.append(key, val);
+                }
+
+                // Gửi request
+                const response = await fetch(URL, {
+                    method: 'POST',
+                    headers: {
+                        'User-Agent': 'BestHTTP/2 v2.8.5',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: body.toString()
+                });
+
+                const responseText = await response.text();
+
+                // Hiển thị kết quả
+                const status = response.ok ? '✅ Thành công' : '❌ Lỗi HTTP ' + response.status;
+                responseBox.innerHTML = `<span class="${response.ok ? 'status-ok' : 'status-err'}">${status}</span>\n${responseText}`;
+            } catch (error) {
+                responseBox.innerHTML = `<span class="status-err">❌ Lỗi kết nối: ${error.message}</span>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📤 Gửi Request';
+                loading.classList.add('hidden');
+            }
+        }
+
+        // ========== TỰ ĐỘNG CHUẨN BỊ KHI TẢI TRANG ==========
+        window.onload = function () {
+            prepareData();
+            // Có thể tự động gửi nếu muốn, nhưng để an toàn thì chờ người dùng bấm
+            // Nếu muốn tự động gửi, bỏ comment dòng dưới:
+            // sendRequest();
+        };
+    </script>
+</body>
+
+</html>
