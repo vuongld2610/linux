@@ -51,3 +51,8 @@ https://subs-livecdn.fptplay.net/live/media/vtv5tn/live-dash-avc/index.mpd?sign=
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay53.net/live/media/su-kien-03-4k/4k_dash_hvc/index.mpd?sign=1785500579-OTMxOTUzMA-0-a941cf58303fc52f8d4575ad7c949d51
+
+#EXTINF:-1, sound freedom
+#KODIPROP:inputstream=inputstream.adaptive
+#KODIPROP:inputstream.adaptive.manifest_type=mpd
+https://scontent.fhan14-2.fna.fbcdn.net/hvideo-hil-vll/_nc_cat-108/_nc_sr_t-4/v/rASe4sCh6_v0kBvhWfI2OeuAS2aQy34x-pL4Qc-NXd5YLOg/_nc_ohc-n8MkhZceJl4Q7kNvwG7OVKN/live-dash/dash-abr5/1618128867015238.mpd?_nc_ad=z-m&_nc_cid=0&_nc_eui2=AeGDJUPaFaUURANeZBDuFla9Ob8y0f5MUsU5vzLR_kxSxYS9UZmoplBhjqpjLeslmlTkRAm50J8JgBbL7urnSm31&_nc_rml=0&_nc_zt=28&ccb=2-4&ms=m_CTPAL&sc_t=1&oh=00_AQOwRBnBpTWtM8df6CgKeKVNKyxIBBu3r1qCGX3sWk5nkA&oe=6ACC14B5
