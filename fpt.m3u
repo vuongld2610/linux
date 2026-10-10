@@ -51,7 +51,6 @@ https://subs-livecdn.fptplay.net/live/media/vtv5tn/live-dash-avc/index.mpd?sign=
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
 https://subs-livecdn.fptplay53.net/live/media/su-kien-03-4k/4k_dash_hvc/index.mpd?sign=1785500579-OTMxOTUzMA-0-a941cf58303fc52f8d4575ad7c949d51
-
 #EXTINF:-1, sound freedom
 #KODIPROP:inputstream=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=mpd
